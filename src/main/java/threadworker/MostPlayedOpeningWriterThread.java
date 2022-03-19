@@ -4,14 +4,13 @@ import optimizer.OptimizationAlgorithms;
 import pgn.BinaryGameExtractor;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class PlayerGamesWriterThread extends Thread {
+public class MostPlayedOpeningWriterThread extends Thread {
     private BinaryGameExtractor games;
     private Hashtable hashtable;
 
-    public PlayerGamesWriterThread(BinaryGameExtractor games, Hashtable<String, ArrayList<String>> hashtable) {
+    public MostPlayedOpeningWriterThread(BinaryGameExtractor games, Hashtable<String, Integer> hashtable) {
         this.games = games;
         this.hashtable = hashtable;
     }
@@ -24,16 +23,15 @@ public class PlayerGamesWriterThread extends Thread {
             try {
                 gameGameFile = games.getNextGame();
                 if(gameGameFile != null) {
-                    OptimizationAlgorithms.gamesOfAPlayer(gameGameFile.game, gameGameFile.pathGameFile, hashtable);
+                    OptimizationAlgorithms.mostPlayedOpening(gameGameFile.game, hashtable);
                 }
             } catch(ClassNotFoundException cnfe) {
                 System.out.println("Class not found");
             } catch(IOException ieo) {
-                System.out.println("There was a error with the file");
+                ieo.printStackTrace();
             } catch (NullPointerException npe) {
                 GameGameFileNull = true;
             }
         } while(!GameGameFileNull);
-
     }
 }

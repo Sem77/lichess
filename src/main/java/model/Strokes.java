@@ -39,6 +39,14 @@ public class Strokes implements Serializable {
     }
 
 
+    public String getFirstStroke() {
+        String stroke = "";
+        if(!whiteStrokes.isEmpty() && !blackStrokes.isEmpty())
+            stroke = "<" + whiteStrokes.get(0) + "," + blackStrokes.get(0) + ">";
+        return stroke;
+    }
+
+
     public String toString() {
         String strokes = "";
 

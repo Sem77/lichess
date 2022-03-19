@@ -15,15 +15,19 @@ import java.util.regex.Pattern;
 public class Main {
     public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException {
 
-        String pgnSrc = "/home/ubuntu/Downloads/lichess_db_standard_rated_2016-07.pgn";
-        //String pgnSrc = "/home/ubuntu/Downloads/lichess_db_standard_rated_2013-01.pgn";
+        //String pgnSrc = "/home/ubuntu/Downloads/lichess_db_standard_rated_2016-07.pgn";
+        String pgnSrc = "/home/ubuntu/Downloads/lichess_db_standard_rated_2013-01 (1).pgn";
         //String pgnSrc = "/home/ubuntu/Downloads/t.pgn";
 
         OptimizationWriter ow = new OptimizationWriter();
 
         //ow.saveOptimizedGames(pgnSrc, "07", "2016", 4);
 
-        ow.saveShortestGames("07", "2016", 4);
+        //ow.saveOptimizedGames(pgnSrc,"01", "2013", 4);
+
+        //ow.saveAssociationPlayerGames("01", "2013", 4);
+        //ow.saveShortestGames("01", "2013", 4);
+        ow.saveMostPlayedOpening("01", "2013", 4);
 
         //System.out.println(game);
     }

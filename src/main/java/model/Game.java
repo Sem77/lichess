@@ -120,6 +120,14 @@ public class Game implements Serializable {
         return strokes.getStrokesNumber();
     }
 
+    public String getOpening() {
+        return opening;
+    }
+
+    public Strokes getStrokes() {
+        return strokes;
+    }
+
 
     public String toString() {
         String gameString = "";

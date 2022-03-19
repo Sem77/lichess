@@ -67,4 +67,14 @@ public class OptimizationAlgorithms {
             hashtable.put(strokesNumber, filesContainingGame);
         }
     }
+
+
+    public static void mostPlayedOpening(Game game, Hashtable<String, Integer> hashtable) {
+        String opening = game.getOpening();
+        Integer nbOccOpening;
+        if((nbOccOpening = hashtable.get(opening)) != null)
+            hashtable.put(opening, nbOccOpening+1);
+        else
+            hashtable.put(opening, 1);
+    }
 }

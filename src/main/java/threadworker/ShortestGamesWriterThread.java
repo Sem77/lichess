@@ -9,7 +9,7 @@ import java.util.Hashtable;
 
 public class ShortestGamesWriterThread extends Thread {
     private BinaryGameExtractor games;
-    private Hashtable<Integer, ArrayList<String>> hashtable;
+    private Hashtable hashtable;
 
     public ShortestGamesWriterThread(BinaryGameExtractor games, Hashtable<Integer, ArrayList<String>> hashtable) {
         this.games = games;
@@ -28,7 +28,6 @@ public class ShortestGamesWriterThread extends Thread {
             } catch(ClassNotFoundException cnfe) {
                 System.out.println("Class not found");
             } catch(IOException ieo) {
-                //System.out.println("There was a error with the file");
                 ieo.printStackTrace();
             } catch (NullPointerException npe) {
                 GameGameFileNull = true;

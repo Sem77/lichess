@@ -17,7 +17,7 @@ public class GameExtractorFromPgn {
     private int maxGamePerFile = 0;
     private int n = 0;
 
-    public GameExtractorFromPgn(String pgnFilePath, File directoryToSave) throws IOException {
+    public GameExtractorFromPgn(File pgnFilePath, File directoryToSave) throws IOException {
         pgnFile = new BufferedReader(new InputStreamReader(new FileInputStream(pgnFilePath)));
         fileNumber = 0;
 
@@ -96,6 +96,12 @@ public class GameExtractorFromPgn {
         return game;
     }
 
+
+    /**
+     * find the next chess game in the file
+     * @return the game String found
+     * @throws IOException
+     */
     public synchronized String findNextGame() throws IOException {
         gameString = "";
         String line;
@@ -114,7 +120,7 @@ public class GameExtractorFromPgn {
     }
 
     /**
-     * @return the next game found in the file
+     * @return the next game found in the file to the thread asking
      */
     public synchronized GameGameSaver getNextGame() throws IOException {
         String game = findNextGame();

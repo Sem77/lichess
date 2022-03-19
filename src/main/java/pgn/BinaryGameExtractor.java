@@ -26,7 +26,7 @@ public class BinaryGameExtractor {
 
     /**
      * synchronized because many threads will try to call it
-     * this method read a game file and return to the calling thread a GameGameFile object
+     * this method read a game file and return a GameGameFile object to the thread asking
      * @return GameGameFile which contains a game and the filepath the games is from
      * @throws ClassNotFoundException
      * @throws IOException
@@ -51,14 +51,14 @@ public class BinaryGameExtractor {
             }
         }
 
-        // if we read of the files from gamesFile
+        // if we read the files from gamesFile
         // returns null
         return null;
     }
 
     /**
-     * @return ObjectInputStream a the new gameFile from gamesFile
-     *         null if there are no more gameFile in gamesFile
+     * @return ObjectInputStream a new gameFile from the list of gamesFile
+     *         null if there are no more gameFile in the list of gamesFile
      */
     private synchronized ObjectInputStream getNextGames() {
         try {
