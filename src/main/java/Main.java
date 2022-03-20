@@ -1,33 +1,29 @@
 import exception.NoFileDataFoundException;
-import model.Game;
-import monitor.OptimizationWriter;
-import optimizer.Constants;
-import pgn.GameExtractorFromPgn;
-import pgn.PgnGameExtractor;
+import monitor.AssociationPlayerGamesMonitor;
+import monitor.MostActivePlayerOverAMonth;
+import monitor.MostPlayedOpeningMonitor;
+import monitor.ShortestGamesMonitor;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
-    public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException {
+    public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException, NoSuchMethodException {
 
         //String pgnSrc = "/home/ubuntu/Downloads/lichess_db_standard_rated_2016-07.pgn";
-        String pgnSrc = "/home/ubuntu/Downloads/lichess_db_standard_rated_2013-01 (1).pgn";
+        //String pgnSrc = "/home/ubuntu/Downloads/lichess_db_standard_rated_2013-01 (1).pgn";
         //String pgnSrc = "/home/ubuntu/Downloads/t.pgn";
 
-        OptimizationWriter ow = new OptimizationWriter();
+        //OptimizationWriter ow = new OptimizationWriter();
 
-        //ow.saveOptimizedGames(pgnSrc,"01", "2013", 4);
+        AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("01", "2013");
+        MostActivePlayerOverAMonth mapom = new MostActivePlayerOverAMonth("01", "2013");
+        MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("01", "2013");
+        ShortestGamesMonitor sgm = new ShortestGamesMonitor("01", "2013");
 
-        //ow.saveAssociationPlayerGames("01", "2013", 4);
-        //ow.saveShortestGames("01", "2013", 4);
-        //ow.saveMostPlayedOpening("01", "2013", 4);
-        //ow.saveMostActivePlayersOverAMonth("01", "2013", 4);
-
-        //System.out.println(game);
+        //apg.buildHastable();
+        //mapom.buildHastable();
+        //mpom.buildHastable();
+        //sgm.buildHastable();
     }
 }

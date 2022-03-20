@@ -7,13 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class PlayerGamesWriterThread extends Thread {
-    private BinaryGameExtractor games;
-    private Hashtable hashtable;
+public class PlayerGamesWriterThread extends ThreadWorker {
 
     public PlayerGamesWriterThread(BinaryGameExtractor games, Hashtable<String, ArrayList<String>> hashtable) {
-        this.games = games;
-        this.hashtable = hashtable;
+        super(games, hashtable);
     }
 
 

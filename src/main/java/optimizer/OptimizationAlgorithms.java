@@ -15,7 +15,7 @@ public class OptimizationAlgorithms {
      * @param hashtable key: the username of a player
      *                  value: list of filepath we can find the games that the player played
      */
-    public static void gamesOfAPlayer(Game game, String pathFileContainingGame, Hashtable<String, ArrayList<String>> hashtable) {
+    public synchronized static void gamesOfAPlayer(Game game, String pathFileContainingGame, Hashtable<String, ArrayList<String>> hashtable) {
 
         String white = game.getWhitePlayer().getUsername(); // get the username of the player white
         if(!hashtable.containsKey(white)) {
@@ -54,7 +54,7 @@ public class OptimizationAlgorithms {
     }
 
 
-    public static void shortestGames(Game game, String pathFileContainingGame, Hashtable<Integer, ArrayList<String>> hashtable) {
+    public synchronized static void shortestGames(Game game, String pathFileContainingGame, Hashtable<Integer, ArrayList<String>> hashtable) {
         int strokesNumber = game.getStrokesNumber();
 
         if(!hashtable.containsKey(strokesNumber)) {
@@ -70,7 +70,7 @@ public class OptimizationAlgorithms {
     }
 
 
-    public static void mostPlayedOpening(Game game, Hashtable<String, Integer> hashtable) {
+    public synchronized static void mostPlayedOpening(Game game, Hashtable<String, Integer> hashtable) {
         String opening = game.getOpening();
         Integer nbOccOpening;
         if((nbOccOpening = hashtable.get(opening)) != null)
@@ -80,7 +80,7 @@ public class OptimizationAlgorithms {
     }
 
 
-    public static void mostActivePlayer(Player player, Hashtable<String, Integer> hashtable) {
+    public synchronized static void mostActivePlayer(Player player, Hashtable<String, Integer> hashtable) {
         String playerUsername = player.getUsername();
         Integer nbGamesPlayed;
         if((nbGamesPlayed = hashtable.get(playerUsername)) != null)

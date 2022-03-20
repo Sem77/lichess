@@ -6,13 +6,10 @@ import pgn.BinaryGameExtractor;
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class MostActivePlayersOverAMonthWriterThread extends Thread {
-    private BinaryGameExtractor games;
-    private Hashtable hashtable;
+public class MostActivePlayersOverAMonthWriterThread extends ThreadWorker {
 
     public MostActivePlayersOverAMonthWriterThread(BinaryGameExtractor games, Hashtable<String, Integer> hashtable) {
-        this.games = games;
-        this.hashtable = hashtable;
+        super(games, hashtable);
     }
 
 
