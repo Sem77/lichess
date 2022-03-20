@@ -21,13 +21,12 @@ public class Main {
 
         OptimizationWriter ow = new OptimizationWriter();
 
-        //ow.saveOptimizedGames(pgnSrc, "07", "2016", 4);
-
         //ow.saveOptimizedGames(pgnSrc,"01", "2013", 4);
 
         //ow.saveAssociationPlayerGames("01", "2013", 4);
         //ow.saveShortestGames("01", "2013", 4);
-        ow.saveMostPlayedOpening("01", "2013", 4);
+        //ow.saveMostPlayedOpening("01", "2013", 4);
+        //ow.saveMostActivePlayersOverAMonth("01", "2013", 4);
 
         //System.out.println(game);
     }

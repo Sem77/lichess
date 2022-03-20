@@ -4,10 +4,7 @@ import exception.NoFileDataFoundException;
 import optimizer.Constants;
 import pgn.BinaryGameExtractor;
 import pgn.GameExtractorFromPgn;
-import threadworker.GameWriterThread;
-import threadworker.MostPlayedOpeningWriterThread;
-import threadworker.PlayerGamesWriterThread;
-import threadworker.ShortestGamesWriterThread;
+import threadworker.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -275,6 +272,73 @@ public class OptimizationWriter {
             // Save the hashtable in a file
             ObjectOutputStream hashTableOutputStream = new ObjectOutputStream(new FileOutputStream(hashTableFile));
             hashTableOutputStream.writeObject(most_played_opening_games_hashtable);
+            hashTableOutputStream.close();
+
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("Source file not found");
+        } catch (IOException ioe) {
+            System.out.println("There was an error with the file");
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println("Class not found");
+        } catch(InterruptedException ie) {
+            ie.printStackTrace();
+        }
+    }
+
+
+    public void saveMostActivePlayersOverAMonth(String month, String year, int numberOfThreads) throws NoFileDataFoundException {
+        String pathToRead = Constants.GAMES_DATA_DIRECTORY + File.separator + year + File.separator + month;
+        File directoryToRead = new File(pathToRead); // Directory where the gameFiles are stored
+
+        // if the directory doesn't exist, throw a NoFileDataFoundException and quit
+        if(!directoryToRead.exists()) {
+            throw new NoFileDataFoundException("There is no data saved for the year or the month specified");
+        }
+
+        ArrayList<File> gamesFiles = new ArrayList<>(Arrays.asList(directoryToRead.listFiles())); // list of all the files that are in directoryToRead
+
+        // removing the directories from the gamesFiles and keeping only the files
+        for(int i=0; i<gamesFiles.size(); i++) {
+            if(!gamesFiles.get(i).isFile())
+                gamesFiles.remove(i);
+        }
+
+        // if there is no file found, throw a NoFileDataFoundException and quit
+        if(gamesFiles.isEmpty()) {
+            throw new NoFileDataFoundException("No file data found in the year and month specified");
+        }
+
+        try {
+            BinaryGameExtractor gamesExtractor = new BinaryGameExtractor(gamesFiles);
+
+            File hashTableDirectory = new File(directoryToRead, File.separator + "hashtables");
+
+            if(!hashTableDirectory.exists()) {
+                hashTableDirectory.mkdirs();
+            }
+
+            File hashTableFile = new File(hashTableDirectory, "most_active_players_hashtable.dat");
+            Hashtable<String, Integer> most_active_players_hashtable = new Hashtable<>();
+
+            // Creation of the threads and launching
+            MostActivePlayersOverAMonthWriterThread[] mostActivePlayersOverAMonthWriterThreads = new MostActivePlayersOverAMonthWriterThread[numberOfThreads];
+            for(int i=0; i<numberOfThreads; i++) {
+                mostActivePlayersOverAMonthWriterThreads[i] = new MostActivePlayersOverAMonthWriterThread(gamesExtractor, most_active_players_hashtable);
+            }
+
+            for(int i=0; i<numberOfThreads; i++) {
+                mostActivePlayersOverAMonthWriterThreads[i].start();
+            }
+
+            for(int i=0; i<numberOfThreads; i++) {
+                mostActivePlayersOverAMonthWriterThreads[i].join();
+            }
+
+            //gamesExtractor.closeStream();
+
+            // Save the hashtable in a file
+            ObjectOutputStream hashTableOutputStream = new ObjectOutputStream(new FileOutputStream(hashTableFile));
+            hashTableOutputStream.writeObject(most_active_players_hashtable);
             hashTableOutputStream.close();
 
         } catch (FileNotFoundException fnfe) {

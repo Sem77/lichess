@@ -1,6 +1,7 @@
 package optimizer;
 
 import model.Game;
+import model.Player;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -39,7 +40,7 @@ public class OptimizationAlgorithms {
         /**
          * Do the same for the black player
          */
-        String black = game.getBlackPLayer().getUsername(); // get the username of the player black
+        String black = game.getBlackPlayer().getUsername(); // get the username of the player black
         if(!hashtable.containsKey(black)) {
             ArrayList<String> filesContainingGame = new ArrayList<>();
             filesContainingGame.add(pathFileContainingGame);
@@ -76,5 +77,15 @@ public class OptimizationAlgorithms {
             hashtable.put(opening, nbOccOpening+1);
         else
             hashtable.put(opening, 1);
+    }
+
+
+    public static void mostActivePlayer(Player player, Hashtable<String, Integer> hashtable) {
+        String playerUsername = player.getUsername();
+        Integer nbGamesPlayed;
+        if((nbGamesPlayed = hashtable.get(playerUsername)) != null)
+            hashtable.put(playerUsername, nbGamesPlayed+1);
+        else
+            hashtable.put(playerUsername, 1);
     }
 }

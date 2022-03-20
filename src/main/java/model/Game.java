@@ -112,7 +112,7 @@ public class Game implements Serializable {
         return white;
     }
 
-    public Player getBlackPLayer() {
+    public Player getBlackPlayer() {
         return black;
     }
 
