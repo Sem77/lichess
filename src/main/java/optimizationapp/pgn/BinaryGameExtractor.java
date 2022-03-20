@@ -1,6 +1,6 @@
-package pgn;
+package optimizationapp.pgn;
 
-import model.Game;
+import optimizationapp.model.Game;
 
 import java.io.*;
 import java.util.List;

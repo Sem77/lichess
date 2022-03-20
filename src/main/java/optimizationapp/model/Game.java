@@ -1,4 +1,4 @@
-package model;
+package optimizationapp.model;
 
 import java.text.SimpleDateFormat;
 import java.text.ParseException;

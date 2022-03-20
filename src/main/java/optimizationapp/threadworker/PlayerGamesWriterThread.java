@@ -1,7 +1,7 @@
-package threadworker;
+package optimizationapp.threadworker;
 
-import optimizer.OptimizationAlgorithms;
-import pgn.BinaryGameExtractor;
+import optimizationapp.optimizer.OptimizationAlgorithms;
+import optimizationapp.pgn.BinaryGameExtractor;
 
 import java.io.IOException;
 import java.util.ArrayList;

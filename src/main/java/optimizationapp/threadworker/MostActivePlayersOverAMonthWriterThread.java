@@ -1,14 +1,14 @@
-package threadworker;
+package optimizationapp.threadworker;
 
-import optimizer.OptimizationAlgorithms;
-import pgn.BinaryGameExtractor;
+import optimizationapp.optimizer.OptimizationAlgorithms;
+import optimizationapp.pgn.BinaryGameExtractor;
 
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class MostPlayedOpeningWriterThread extends ThreadWorker {
+public class MostActivePlayersOverAMonthWriterThread extends ThreadWorker {
 
-    public MostPlayedOpeningWriterThread(BinaryGameExtractor games, Hashtable<String, Integer> hashtable) {
+    public MostActivePlayersOverAMonthWriterThread(BinaryGameExtractor games, Hashtable<String, Integer> hashtable) {
         super(games, hashtable);
     }
 
@@ -20,7 +20,8 @@ public class MostPlayedOpeningWriterThread extends ThreadWorker {
             try {
                 gameGameFile = games.getNextGame();
                 if(gameGameFile != null) {
-                    OptimizationAlgorithms.mostPlayedOpening(gameGameFile.game, hashtable);
+                    OptimizationAlgorithms.mostActivePlayer(gameGameFile.game.getWhitePlayer(), hashtable);
+                    OptimizationAlgorithms.mostActivePlayer(gameGameFile.game.getBlackPlayer(), hashtable);
                 }
             } catch(ClassNotFoundException cnfe) {
                 System.out.println("Class not found");

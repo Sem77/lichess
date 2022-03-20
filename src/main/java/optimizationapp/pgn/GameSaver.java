@@ -1,11 +1,9 @@
-package pgn;
+package optimizationapp.pgn;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.concurrent.locks.*;
 
-import model.Game;
+import optimizationapp.model.Game;
 
 public class GameSaver {
     private String EXTENSION = "dat";

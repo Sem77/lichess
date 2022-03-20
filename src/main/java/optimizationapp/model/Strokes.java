@@ -1,4 +1,4 @@
-package model;
+package optimizationapp.model;
 
 import java.util.ArrayList;
 import java.io.Serializable;

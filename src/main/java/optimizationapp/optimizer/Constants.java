@@ -1,4 +1,4 @@
-package optimizer;
+package optimizationapp.optimizer;
 
 import java.util.regex.Pattern;
 

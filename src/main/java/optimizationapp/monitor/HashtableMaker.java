@@ -1,9 +1,9 @@
-package monitor;
+package optimizationapp.monitor;
 
-import exception.NoFileDataFoundException;
-import optimizer.Constants;
-import pgn.BinaryGameExtractor;
-import threadworker.ThreadWorker;
+import optimizationapp.exception.NoFileDataFoundException;
+import optimizationapp.optimizer.Constants;
+import optimizationapp.pgn.BinaryGameExtractor;
+import optimizationapp.threadworker.ThreadWorker;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
