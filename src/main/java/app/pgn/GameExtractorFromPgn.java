@@ -1,7 +1,7 @@
-package optimizationapp.pgn;
+package app.pgn;
 
-import optimizationapp.model.Game;
-import optimizationapp.optimizer.Constants;
+import app.model.Game;
+import app.optimizer.Constants;
 
 import java.io.*;
 import java.text.ParseException;

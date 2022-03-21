@@ -1,8 +1,8 @@
-package optimizationapp.monitor;
+package app.monitor;
 
-import optimizationapp.optimizer.Constants;
-import optimizationapp.pgn.GameExtractorFromPgn;
-import optimizationapp.threadworker.GameWriterThread;
+import app.optimizer.Constants;
+import app.pgn.GameExtractorFromPgn;
+import app.threadworker.GameWriterThread;
 
 import java.io.*;
 

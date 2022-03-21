@@ -1,6 +1,6 @@
-package optimizationapp.threadworker;
+package app.threadworker;
 
-import optimizationapp.pgn.BinaryGameExtractor;
+import app.pgn.BinaryGameExtractor;
 
 import java.util.Hashtable;
 

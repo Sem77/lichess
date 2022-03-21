@@ -1,9 +1,9 @@
-package optimizationapp.pgn;
+package app.pgn;
 
 import java.io.*;
 import java.text.ParseException;
 
-import optimizationapp.model.Game;
+import app.model.Game;
 
 public class GameSaver {
     private String EXTENSION = "dat";

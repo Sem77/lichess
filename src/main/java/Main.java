@@ -1,5 +1,5 @@
-import optimizationapp.exception.NoFileDataFoundException;
-import optimizationapp.monitor.*;
+import app.exception.NoFileDataFoundException;
+import app.monitor.*;
 
 import java.io.*;
 import java.text.ParseException;
@@ -19,9 +19,9 @@ public class Main {
         MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("01", "2013");
         ShortestGamesMonitor sgm = new ShortestGamesMonitor("01", "2013");
 
-        //apg.buildHastable();
-        //mapom.buildHastable();
-        //mpom.buildHastable();
-        //sgm.buildHastable();
+        apg.buildHastable();
+        mapom.buildHastable();
+        mpom.buildHastable();
+        sgm.buildHastable();
     }
 }

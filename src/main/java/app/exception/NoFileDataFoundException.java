@@ -1,4 +1,4 @@
-package optimizationapp.exception;
+package app.exception;
 
 public class NoFileDataFoundException extends Exception{
     public NoFileDataFoundException(String msg) {

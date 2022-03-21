@@ -1,7 +1,7 @@
-package optimizationapp.optimizer;
+package app.optimizer;
 
-import optimizationapp.model.Game;
-import optimizationapp.model.Player;
+import app.model.Game;
+import app.model.Player;
 
 import java.util.ArrayList;
 import java.util.Hashtable;

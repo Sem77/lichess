@@ -1,7 +1,7 @@
-package optimizationapp.threadworker;
+package app.threadworker;
 
-import optimizationapp.model.Game;
-import optimizationapp.pgn.GameExtractorFromPgn;
+import app.model.Game;
+import app.pgn.GameExtractorFromPgn;
 
 import java.io.IOException;
 import java.text.ParseException;

@@ -1,6 +1,6 @@
-package optimizationapp.pgn;
+package app.pgn;
 
-import optimizationapp.model.Game;
+import app.model.Game;
 
 import java.io.*;
 import java.util.List;
@@ -60,7 +60,7 @@ public class BinaryGameExtractor {
      * @return ObjectInputStream a new gameFile from the list of gamesFile
      *         null if there are no more gameFile in the list of gamesFile
      */
-    private synchronized ObjectInputStream getNextGames() {
+    private ObjectInputStream getNextGames() {
         try {
             indexCurrentFile++;
             if (indexCurrentFile < gamesFiles.size()) {
