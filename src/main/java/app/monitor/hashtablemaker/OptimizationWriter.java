@@ -1,10 +1,13 @@
-package app.monitor;
+package app.monitor.hashtablemaker;
 
 import app.optimizer.Constants;
 import app.pgn.GameExtractorFromPgn;
 import app.threadworker.GameWriterThread;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
 
 /**
  * Class to write in binary files, hashtables or any data structure to optimize the research
@@ -22,6 +25,11 @@ public class OptimizationWriter {
      * @param month month in the year the games were played
      * @param year year the games were played
      * @param numberOfThreads number of thread to delegate
+     */
+    /**
+     * On a privilégié cette méthode par rapport à la méthode seek() de RandomAccessFile pour des raisons de sécurité pour des questions de sécurité
+     * l'inconvénient avec la méthode seek est que si un seul octet est modifié, toutes les données seront stockées dans la table de hashage seront erronées
+     * avec notre méthode, si un petit fichier est erroné, cela ne casse pas complètement le système. On perd juste 20 parties (pas très grave)
      */
     public void saveOptimizedGames(String pathToPgnFile, String month, String year, int numberOfThreads) throws FileNotFoundException {
 

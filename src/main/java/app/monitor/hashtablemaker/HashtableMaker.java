@@ -1,4 +1,4 @@
-package app.monitor;
+package app.monitor.hashtablemaker;
 
 import app.exception.NoFileDataFoundException;
 import app.optimizer.Constants;
@@ -27,6 +27,11 @@ public abstract class HashtableMaker {
         this.hashtable = hashtable;
     }
 
+    /**
+     * build the hashtable
+     * @throws NoFileDataFoundException
+     * @throws NoSuchMethodException
+     */
     public void buildHastable() throws NoFileDataFoundException, NoSuchMethodException {
         String pathToRead = Constants.GAMES_DATA_DIRECTORY + File.separator + year + File.separator + month;
         File directoryToRead = new File(pathToRead); // Directory where the gameFiles are stored
@@ -84,9 +89,9 @@ public abstract class HashtableMaker {
             hashTableOutputStream.writeObject(hashtable);
             hashTableOutputStream.close();
 
-        } catch (FileNotFoundException fnfe) {
+        } /*catch (FileNotFoundException fnfe) {
             System.out.println("Source file not found");
-        } catch (IOException ioe) {
+        }*/ catch (IOException ioe) {
             System.out.println("There was an error with the file");
         } catch (ClassNotFoundException cnfe) {
             System.out.println("Class not found");

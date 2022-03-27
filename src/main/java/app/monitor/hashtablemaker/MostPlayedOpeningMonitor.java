@@ -1,4 +1,4 @@
-package app.monitor;
+package app.monitor.hashtablemaker;
 
 import app.optimizer.Constants;
 
