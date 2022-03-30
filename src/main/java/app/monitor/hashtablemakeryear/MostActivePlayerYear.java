@@ -12,7 +12,7 @@ public class MostActivePlayerYear extends HashtableMakerYear {
         super(year, Constants.MOST_ACTIVE_PLAYERS, Constants.MOST_ACTIVE_PLAYERS_OVER_A_YEAR);
     }
 
-    public void buildHashtable(String year) {
+    public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
         ArrayList<File> hashtablesPaths = findHashtablesByNameInMonth(new File(baseDirectory), hashtableMonthName);
         Hashtable<String, Integer> hashtableYear = new Hashtable<>();
@@ -32,7 +32,7 @@ public class MostActivePlayerYear extends HashtableMakerYear {
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableName + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_ACTIVE_PLAYERS_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
         } catch (FileNotFoundException fnfe) {
 
@@ -46,12 +46,14 @@ public class MostActivePlayerYear extends HashtableMakerYear {
         Hashtable<String, Integer> hashtableSrc = h;
         Set<String> keys = hashtableSrc.keySet();
         for (String key : keys) {
-            Integer n = hashtableDest.get(key);
+            Integer n;
             Integer m = hashtableSrc.get(key);
-            if(n != null)
-                dest.put(key, m + n);
-            else
-                dest.put(key, m);
+
+            if(hashtableDest.containsKey(key)) {
+                n = hashtableDest.get(key);
+                m += n;
+            }
+            dest.put(key, m);
         }
     }
 }

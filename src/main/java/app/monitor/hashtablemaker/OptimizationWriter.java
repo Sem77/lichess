@@ -5,9 +5,6 @@ import app.pgn.GameExtractorFromPgn;
 import app.threadworker.GameWriterThread;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Set;
 
 /**
  * Class to write in binary files, hashtables or any data structure to optimize the research

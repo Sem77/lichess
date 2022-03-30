@@ -13,9 +13,9 @@ public class AssociationPlayerGamesYear extends HashtableMakerYear {
         super(year, Constants.A_PLAYER_GAME, Constants.A_PLAYER_GAME_OVER_A_YEAR);
     }
 
-    public void buildHashtable(String year) {
+    public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
-        ArrayList<File> hashtablesPaths = findHashtablesByNameInMonth(new File(baseDirectory), hashTableName);
+        ArrayList<File> hashtablesPaths = findHashtablesByNameInMonth(new File(baseDirectory), hashtableMonthName);
         Hashtable<String, ArrayList<String>> hashtableYear = new Hashtable<>();
         for (File hashtablePath : hashtablesPaths) {
             try {
@@ -33,7 +33,7 @@ public class AssociationPlayerGamesYear extends HashtableMakerYear {
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_PLAYED_OPENING_GAMES_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.A_PLAYER_GAME_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
         } catch (FileNotFoundException fnfe) {
 
@@ -44,16 +44,18 @@ public class AssociationPlayerGamesYear extends HashtableMakerYear {
 
 
     public void mergeHashtables(Hashtable dest, Hashtable h) {
-        Hashtable<String, ArrayList<String>> hastableDest = dest;
+        Hashtable<String, ArrayList<String>> hashtableDest = dest;
         Hashtable<String, ArrayList<String>> hashtableSrc = h;
-        Set<String> keys = h.keySet();
+        Set<String> keys = hashtableSrc.keySet();
         for (String key : keys) {
-            ArrayList<String> n = hastableDest.get(key);
+            ArrayList<String> n;
             ArrayList<String> m = hashtableSrc.get(key);
-            if(n != null)
-                dest.put(key, n.addAll(m));
-            else
-                dest.put(key, m);
+
+            if(hashtableDest.containsKey(key)) {
+                n = hashtableDest.get(key);
+                m.addAll(n);
+            }
+            dest.put(key, m);
         }
     }
 }

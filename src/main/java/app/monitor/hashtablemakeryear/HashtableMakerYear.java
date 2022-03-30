@@ -5,23 +5,22 @@ import app.optimizer.Constants;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Set;
 
 public abstract class HashtableMakerYear {
     public String year;
     public String hashtableMonthName;
-    public String hashTableName;
+    public String hashTableYearName;
     public String baseDirectory;
 
     public HashtableMakerYear(String year, String hashtableMonthName, String hashTableYearName) {
         this.year = year;
         this.hashtableMonthName = hashtableMonthName;
-        this.hashTableName = hashTableName;
+        this.hashTableYearName = hashTableYearName;
         baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
     }
 
 
-    public abstract void buildHashtable(String year);
+    public abstract void buildHashtable();
 
 
     public abstract void mergeHashtables(Hashtable dest, Hashtable h);

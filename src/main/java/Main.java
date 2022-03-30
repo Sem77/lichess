@@ -1,5 +1,9 @@
 import app.exception.NoFileDataFoundException;
 import app.monitor.hashtablemaker.*;
+import app.monitor.hashtablemakeryear.AssociationPlayerGamesYear;
+import app.monitor.hashtablemakeryear.MostActivePlayerYear;
+import app.monitor.hashtablemakeryear.MostPlayedOpeningYear;
+import app.monitor.hashtablemakeryear.ShortestGamesYear;
 
 import java.io.*;
 import java.text.ParseException;
@@ -25,15 +29,25 @@ public class Main {
         //ow.saveOptimizedGames(pgn07, "07", "2013", 4);
 
 
-        AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
-        MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
-        MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("02", "2013");
-        ShortestGamesMonitor sgm = new ShortestGamesMonitor("02", "2013");
+        /*AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("04", "2013");
+        MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("04", "2013");
+        MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("04", "2013");
+        ShortestGamesMonitor sgm = new ShortestGamesMonitor("04", "2013");
 
         apg.buildHastable();
         mapom.buildHastable();
         mpom.buildHastable();
-        sgm.buildHastable();
+        sgm.buildHastable();*/
+
+        AssociationPlayerGamesYear apgy = new AssociationPlayerGamesYear("2013");
+        MostPlayedOpeningYear mpoy = new MostPlayedOpeningYear("2013");
+        MostActivePlayerYear mapy = new MostActivePlayerYear("2013");
+        ShortestGamesYear sgy = new ShortestGamesYear("2013");
+
+        apgy.buildHashtable();
+        mpoy.buildHashtable();
+        mapy.buildHashtable();
+        sgy.buildHashtable();
 
     }
 }

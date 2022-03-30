@@ -12,9 +12,9 @@ public class ShortestGamesYear extends HashtableMakerYear {
         super(year, Constants.SHORTEST_GAMES, Constants.SHORTEST_GAMES_OVER_A_YEAR);
     }
 
-    public void buildHashtable(String year) {
+    public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
-        ArrayList<File> hashtablesPaths = findHashtablesByNameInMonth(new File(baseDirectory), hashTableName);
+        ArrayList<File> hashtablesPaths = findHashtablesByNameInMonth(new File(baseDirectory), hashtableMonthName);
         Hashtable<Integer, ArrayList<String>> hashtableYear = new Hashtable<>();
         for (File hashtablePath : hashtablesPaths) {
             try {
@@ -32,7 +32,7 @@ public class ShortestGamesYear extends HashtableMakerYear {
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_PLAYED_OPENING_GAMES_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.SHORTEST_GAMES_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
         } catch (FileNotFoundException fnfe) {
 
@@ -46,12 +46,14 @@ public class ShortestGamesYear extends HashtableMakerYear {
         Hashtable<Integer, ArrayList<String>> hashtableSrc = h;
         Set<Integer> keys = hashtableSrc.keySet();
         for (Integer key : keys) {
-            ArrayList<String> n = hashtableDest.get(key);
+            ArrayList<String> n;
             ArrayList<String> m = hashtableSrc.get(key);
-            if(n != null)
-                dest.put(key, n.addAll(m));
-            else
-                dest.put(key, m);
+
+            if(hashtableDest.containsKey(key)) {
+                n = hashtableDest.get(key);
+                m.addAll(n);
+            }
+            dest.put(key, m);
         }
     }
 }
