@@ -1,0 +1,59 @@
+package app.monitor.HashtableMakerAll;
+
+import app.optimizer.Constants;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
+
+public class MostPlayedOpeningAll extends HashtableMakerAll{
+    public MostPlayedOpeningAll() {
+        super(Constants.MOST_PLAYED_OPENING_GAMES_OVER_A_YEAR, Constants.MOST_PLAYED_OPENING_GAMES_ALL);
+    }
+
+    public void buildHashtable() {
+        String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
+        ArrayList<File> hashtablesPaths = findHashtablesByNameInYear(new File(baseDirectory), hashtableYearName);
+        Hashtable<String, Integer> hashtableYear = new Hashtable<>();
+        for (File hashtablePath : hashtablesPaths) {
+            try {
+                ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtablePath));
+                Hashtable<String, Integer> hashtableMonth = (Hashtable<String, Integer>) o.readObject();
+                mergeHashtables(hashtableYear, hashtableMonth);
+                o.close();
+            } catch (FileNotFoundException fnfe) {
+                System.out.println("An hashtable wasn't found");
+            } catch (ClassNotFoundException cnfe) {
+                System.out.println("Could not load an hashtable");
+            } catch (IOException ioe) {
+                System.out.println("There was an error with an hashtable");
+            }
+        }
+
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_PLAYED_OPENING_GAMES_ALL + "." + Constants.BINARY_EXTENSION));
+            out.writeObject(hashtableYear);
+        } catch (FileNotFoundException fnfe) {
+
+        } catch (IOException ioe) {
+
+        }
+    }
+
+    public void mergeHashtables(Hashtable dest, Hashtable h) {
+        Hashtable<String, Integer> hashtableDest = dest;
+        Hashtable<String, Integer> hashtableSrc = h;
+        Set<String> keys = hashtableSrc.keySet();
+        for (String key : keys) {
+            Integer n;
+            Integer m = hashtableSrc.get(key);
+
+            if(hashtableDest.containsKey(key)) {
+                n = hashtableDest.get(key);
+                m += n;
+            }
+            dest.put(key, m);
+        }
+    }
+}

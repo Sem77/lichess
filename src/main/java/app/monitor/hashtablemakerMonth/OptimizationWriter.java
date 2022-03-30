@@ -1,4 +1,4 @@
-package app.monitor.hashtablemaker;
+package app.monitor.hashtablemakerMonth;
 
 import app.optimizer.Constants;
 import app.pgn.GameExtractorFromPgn;

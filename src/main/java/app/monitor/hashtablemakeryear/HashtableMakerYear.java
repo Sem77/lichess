@@ -20,10 +20,10 @@ public abstract class HashtableMakerYear {
     }
 
 
-    public abstract void buildHashtable();
+    /*public abstract void buildHashtable();
 
 
-    public abstract void mergeHashtables(Hashtable dest, Hashtable h);
+    public abstract void mergeHashtables(Hashtable dest, Hashtable h);*/
 
 
     private ArrayList<File> findHashtablesByNameInYear(File baseDirectory, String hashtableName) {
