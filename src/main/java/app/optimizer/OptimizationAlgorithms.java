@@ -5,6 +5,7 @@ import app.model.Player;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.TreeSet;
 
 public class OptimizationAlgorithms {
 
@@ -54,16 +55,16 @@ public class OptimizationAlgorithms {
     }
 
 
-    public synchronized static void shortestGames(Game game, String pathFileContainingGame, Hashtable<Integer, ArrayList<String>> hashtable) {
+    public synchronized static void shortestGames(Game game, String pathFileContainingGame, Hashtable<Integer, TreeSet<String>> hashtable) {
         int strokesNumber = game.getStrokesNumber();
 
         if(!hashtable.containsKey(strokesNumber)) {
-            ArrayList<String> filesContainingGame = new ArrayList<>();
+            TreeSet<String> filesContainingGame = new TreeSet<>();
             filesContainingGame.add(pathFileContainingGame);
             hashtable.put(strokesNumber, filesContainingGame);
         }
         else {
-            ArrayList<String> filesContainingGame = hashtable.get(strokesNumber);
+            TreeSet<String> filesContainingGame = hashtable.get(strokesNumber);
             filesContainingGame.add(pathFileContainingGame);
             hashtable.put(strokesNumber, filesContainingGame);
         }

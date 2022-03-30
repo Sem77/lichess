@@ -6,9 +6,10 @@ import app.pgn.BinaryGameExtractor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.TreeSet;
 
 public class ShortestGamesWriterThread extends ThreadWorker {
-    public ShortestGamesWriterThread(BinaryGameExtractor games, Hashtable<Integer, ArrayList<String>> hashtable) {
+    public ShortestGamesWriterThread(BinaryGameExtractor games, Hashtable<Integer, TreeSet<String>> hashtable) {
         super(games, hashtable);
     }
 

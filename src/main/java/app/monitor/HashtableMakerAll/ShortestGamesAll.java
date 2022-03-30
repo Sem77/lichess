@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class ShortestGamesAll extends HashtableMakerAll {
     public ShortestGamesAll() {
@@ -16,11 +17,11 @@ public class ShortestGamesAll extends HashtableMakerAll {
     public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
         ArrayList<File> hashtablesPaths = findHashtablesByNameInYear(new File(baseDirectory), hashtableYearName);
-        Hashtable<Integer, ArrayList<String>> hashtableYear = new Hashtable<>();
+        Hashtable<Integer, TreeSet<String>> hashtableYear = new Hashtable<>();
         for (File hashtablePath : hashtablesPaths) {
             try {
                 ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtablePath));
-                Hashtable<Integer, ArrayList<String>> hashtableMonth = (Hashtable<Integer, ArrayList<String>>) o.readObject();
+                Hashtable<Integer, TreeSet<String>> hashtableMonth = (Hashtable<Integer, TreeSet<String>>) o.readObject();
                 mergeHashtables(hashtableYear, hashtableMonth);
                 o.close();
             } catch (FileNotFoundException fnfe) {
@@ -43,12 +44,12 @@ public class ShortestGamesAll extends HashtableMakerAll {
     }
 
     public void mergeHashtables(Hashtable dest, Hashtable h) {
-        Hashtable<Integer, ArrayList<String>> hashtableDest = dest;
-        Hashtable<Integer, ArrayList<String>> hashtableSrc = h;
+        Hashtable<Integer, TreeSet<String>> hashtableDest = dest;
+        Hashtable<Integer, TreeSet<String>> hashtableSrc = h;
         Set<Integer> keys = hashtableSrc.keySet();
         for (Integer key : keys) {
-            ArrayList<String> n;
-            ArrayList<String> m = hashtableSrc.get(key);
+            TreeSet<String> n;
+            TreeSet<String> m = hashtableSrc.get(key);
 
             if(hashtableDest.containsKey(key)) {
                 n = hashtableDest.get(key);
