@@ -6,10 +6,11 @@ import app.pgn.BinaryGameExtractor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.TreeSet;
 
 public class PlayerGamesWriterThread extends ThreadWorker {
 
-    public PlayerGamesWriterThread(BinaryGameExtractor games, Hashtable<String, ArrayList<String>> hashtable) {
+    public PlayerGamesWriterThread(BinaryGameExtractor games, Hashtable<String, TreeSet<String>> hashtable) {
         super(games, hashtable);
     }
 

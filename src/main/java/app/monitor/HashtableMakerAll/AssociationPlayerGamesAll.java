@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class AssociationPlayerGamesAll extends HashtableMakerAll {
     public AssociationPlayerGamesAll() {
@@ -15,11 +16,11 @@ public class AssociationPlayerGamesAll extends HashtableMakerAll {
     public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
         ArrayList<File> hashtablesPaths = findHashtablesByNameInYear(new File(baseDirectory), hashtableYearName);
-        Hashtable<String, ArrayList<String>> hashtableYear = new Hashtable<>();
+        Hashtable<String, TreeSet<String>> hashtableYear = new Hashtable<>();
         for (File hashtablePath : hashtablesPaths) {
             try {
                 ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtablePath));
-                Hashtable<String, ArrayList<String>> hashtableMonth = (Hashtable<String, ArrayList<String>>) o.readObject();
+                Hashtable<String, TreeSet<String>> hashtableMonth = (Hashtable<String, TreeSet<String>>) o.readObject();
                 mergeHashtables(hashtableYear, hashtableMonth);
                 o.close();
             } catch (FileNotFoundException fnfe) {
@@ -43,12 +44,12 @@ public class AssociationPlayerGamesAll extends HashtableMakerAll {
 
 
     public void mergeHashtables(Hashtable dest, Hashtable h) {
-        Hashtable<String, ArrayList<String>> hashtableDest = dest;
-        Hashtable<String, ArrayList<String>> hashtableSrc = h;
+        Hashtable<String, TreeSet<String>> hashtableDest = dest;
+        Hashtable<String, TreeSet<String>> hashtableSrc = h;
         Set<String> keys = hashtableSrc.keySet();
         for (String key : keys) {
-            ArrayList<String> n;
-            ArrayList<String> m = hashtableSrc.get(key);
+            TreeSet<String> n;
+            TreeSet<String> m = hashtableSrc.get(key);
 
             if(hashtableDest.containsKey(key)) {
                 n = hashtableDest.get(key);

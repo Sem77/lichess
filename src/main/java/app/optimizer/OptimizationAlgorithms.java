@@ -16,7 +16,7 @@ public class OptimizationAlgorithms {
      * @param hashtable key: the username of a player
      *                  value: list of filepath we can find the games that the player played
      */
-    public synchronized static void gamesOfAPlayer(Game game, String pathFileContainingGame, Hashtable<String, ArrayList<String>> hashtable) {
+    public synchronized static void gamesOfAPlayer(Game game, String pathFileContainingGame, Hashtable<String, TreeSet<String>> hashtable) {
 
         String white = game.getWhitePlayer().getUsername(); // get the username of the player white
         if(!hashtable.containsKey(white)) {
@@ -24,7 +24,7 @@ public class OptimizationAlgorithms {
              * if hashtable already contains the username,
              * just add pathFileContainingGame to the existing list
              */
-            ArrayList<String> filesContainingGame = new ArrayList<>();
+            TreeSet<String> filesContainingGame = new TreeSet<>();
             filesContainingGame.add(pathFileContainingGame);
             hashtable.put(white, filesContainingGame);
         }
@@ -33,7 +33,7 @@ public class OptimizationAlgorithms {
              * if not,
              * add the username and add pathFileContainingGame a new list
              */
-            ArrayList<String > filesContainingGame = hashtable.get(white);
+            TreeSet<String> filesContainingGame = hashtable.get(white);
             filesContainingGame.add(pathFileContainingGame);
             hashtable.put(white, filesContainingGame);
         }
@@ -43,12 +43,12 @@ public class OptimizationAlgorithms {
          */
         String black = game.getBlackPlayer().getUsername(); // get the username of the player black
         if(!hashtable.containsKey(black)) {
-            ArrayList<String> filesContainingGame = new ArrayList<>();
+            TreeSet<String> filesContainingGame = new TreeSet<>();
             filesContainingGame.add(pathFileContainingGame);
             hashtable.put(black, filesContainingGame);
         }
         else {
-            ArrayList<String > filesContainingGame = hashtable.get(black);
+            TreeSet<String> filesContainingGame = hashtable.get(black);
             filesContainingGame.add(pathFileContainingGame);
             hashtable.put(black, filesContainingGame);
         }

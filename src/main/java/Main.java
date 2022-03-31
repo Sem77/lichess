@@ -33,34 +33,34 @@ public class Main {
         //ow.saveOptimizedGames(pgn07, "07", "2013", 4);
 
 
-        /*AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
-        MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
-        MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("02", "2013");
-        ShortestGamesMonitor sgm = new ShortestGamesMonitor("02", "2013");
+        //AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("01", "2013");
+        //MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("01", "2013");
+        //MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("01", "2013");
+        //ShortestGamesMonitor sgm = new ShortestGamesMonitor("01", "2013");
 
-        apg.buildHastable();
-        mapom.buildHastable();
-        mpom.buildHastable();
-        sgm.buildHastable();*/
+        //apg.buildHastable();
+        //mapom.buildHastable();
+        //mpom.buildHastable();
+        //sgm.buildHastable();
 
-        AssociationPlayerGamesYear apgy = new AssociationPlayerGamesYear("2013");
-        MostPlayedOpeningYear mpoy = new MostPlayedOpeningYear("2013");
-        MostActivePlayerYear mapy = new MostActivePlayerYear("2013");
-        ShortestGamesYear sgy = new ShortestGamesYear("2013");
+        //AssociationPlayerGamesYear apgy = new AssociationPlayerGamesYear("2013");
+        //MostPlayedOpeningYear mpoy = new MostPlayedOpeningYear("2013");
+        //MostActivePlayerYear mapy = new MostActivePlayerYear("2013");
+        //ShortestGamesYear sgy = new ShortestGamesYear("2013");
 
-        apgy.buildHashtable();
-        mpoy.buildHashtable();
-        mapy.buildHashtable();
-        sgy.buildHashtable();
+        //apgy.buildHashtable();
+        //mpoy.buildHashtable();
+        //mapy.buildHashtable();
+        //sgy.buildHashtable();
 
-        /*MostPlayedOpeningAll mpoa = new MostPlayedOpeningAll();
+        //MostPlayedOpeningAll mpoa = new MostPlayedOpeningAll();
         ShortestGamesAll sga = new ShortestGamesAll();
-        AssociationPlayerGamesAll apga = new AssociationPlayerGamesAll();
-        MostActivePlayerAll mapa = new MostActivePlayerAll();
+        //AssociationPlayerGamesAll apga = new AssociationPlayerGamesAll();
+        //MostActivePlayerAll mapa = new MostActivePlayerAll();
 
-        mpoa.buildHashtable();
+        //mpoa.buildHashtable();
         sga.buildHashtable();
-        apga.buildHashtable();
-        mapa.buildHashtable();*/
+        //apga.buildHashtable();
+        //mapa.buildHashtable();
     }
 }
