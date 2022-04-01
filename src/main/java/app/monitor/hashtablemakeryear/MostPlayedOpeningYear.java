@@ -1,9 +1,11 @@
 package app.monitor.hashtablemakeryear;
 
+import app.model.OccurrenceString;
 import app.optimizer.Constants;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Set;
 import java.util.concurrent.CompletionService;
@@ -57,5 +59,34 @@ public class MostPlayedOpeningYear extends HashtableMakerYear{
             }
             dest.put(key, m);
         }
+    }
+
+    public void saveNMostPlayedOpening() {
+        String baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
+        File gamesDataDirectory = new File(baseDirectory);
+        File hashtablePath = new File(gamesDataDirectory + File.separator + Constants.MOST_PLAYED_OPENING_GAMES_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION);
+
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(hashtablePath));
+            Hashtable<String, Integer> hashtable = (Hashtable<String, Integer>) ois.readObject();
+            ois.close();
+
+            ArrayList<OccurrenceString> occurrenceStringArrayList = OccurrenceString.hashtableToOccurrenceString(hashtable);
+            Collections.sort(occurrenceStringArrayList);
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_MOST_PLAYED_OPENING_GAMES_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+
+            for(OccurrenceString occurrenceString : occurrenceStringArrayList) {
+                oos.writeObject(occurrenceString);
+            }
+            oos.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }

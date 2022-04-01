@@ -38,8 +38,8 @@ public class Main {
 
 
         //AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
-        MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
-        //MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("02", "2013");
+        //MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
+        MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("02", "2013");
         //ShortestGamesMonitor sgm = new ShortestGamesMonitor("02", "2013");
 
         //apg.buildHastable();
@@ -47,7 +47,8 @@ public class Main {
         //mpom.buildHastable();
         //sgm.buildHastable();
 
-        mapom.saveNMostActivePlayers();
+        mpom.saveNMostPlayedOpening();
+        //mapom.saveNMostActivePlayers();
 
 
 
@@ -62,6 +63,7 @@ public class Main {
         //mapy.buildHashtable();
         //sgy.buildHashtable();
 
+        //mpoy.saveNMostPlayedOpening();
         //mapy.saveNMostActivePlayers();
 
 
@@ -77,10 +79,11 @@ public class Main {
         //apga.buildHashtable();
         //mapa.buildHashtable();
 
+        //mpoa.saveNMostPlayedOpening();
         //sga.saveFiveShortestGames();
         //mapa.saveNMostActivePlayers();
 
-        ObjectInputStream o = new ObjectInputStream(new FileInputStream("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/most_active_players_in_order_over_a_month.dat"));
+        ObjectInputStream o = new ObjectInputStream(new FileInputStream("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/most_played_opening_games_in_order_over_a_month.dat"));
         OccurrenceString os;
 
         try {
