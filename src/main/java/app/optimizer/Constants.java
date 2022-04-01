@@ -47,6 +47,7 @@ public class Constants {
     public static final String A_PLAYER_GAME_OVER_A_YEAR = "a_player_game_over_a_year_hastable";
     public static final String A_PLAYER_GAME_ALL = "a_player_game_all_hastable";
 
+    public static final String FIVE_SHORTEST_GAMES = "5 shortest games";
     public static final String SHORTEST_GAMES = "shortest_games_hashtable";
     public static final String SHORTEST_GAMES_OVER_A_YEAR = "shortest_games_over_a_year_hashtable";
     public static final String SHORTEST_GAMES_ALL = "shortest_games_over_all_hashtable";
@@ -58,6 +59,9 @@ public class Constants {
     public static final String MOST_ACTIVE_PLAYERS = "most_active_players_hashtable";
     public static final String MOST_ACTIVE_PLAYERS_OVER_A_YEAR = "most_active_players_over_a_year_hashtable";
     public static final String MOST_ACTIVE_PLAYERS_ALL = "most_active_players_all_hashtable";
+    public static final String ORDER_MOST_ACTIVE_PLAYERS_ALL = "most_active_players_in_order_all";
+    public static final String ORDER_MOST_ACTIVE_PLAYERS_OVER_A_YEAR = "most_active_players_in_order_over_a_year";
+    public static final String ORDER_MOST_ACTIVE_PLAYERS_OVER_A_MONTH = "most_active_players_in_order_over_a_month";
 
     public static final int THREADS_DELEGATED = 4;
     public static final int NUMBER_OF_GAMES_PER_FILE = 20;

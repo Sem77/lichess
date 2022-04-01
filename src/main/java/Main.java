@@ -1,4 +1,6 @@
 import app.exception.NoFileDataFoundException;
+import app.model.Game;
+import app.model.OccurrenceString;
 import app.monitor.HashtableMakerAll.AssociationPlayerGamesAll;
 import app.monitor.HashtableMakerAll.MostActivePlayerAll;
 import app.monitor.HashtableMakerAll.MostPlayedOpeningAll;
@@ -11,6 +13,8 @@ import app.monitor.hashtablemakeryear.ShortestGamesYear;
 
 import java.io.*;
 import java.text.ParseException;
+import java.util.Hashtable;
+import java.util.TreeSet;
 
 public class Main {
     public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException, NoSuchMethodException {
@@ -33,15 +37,20 @@ public class Main {
         //ow.saveOptimizedGames(pgn07, "07", "2013", 4);
 
 
-        //AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("01", "2013");
-        //MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("01", "2013");
-        //MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("01", "2013");
-        //ShortestGamesMonitor sgm = new ShortestGamesMonitor("01", "2013");
+        //AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
+        MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
+        //MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("02", "2013");
+        //ShortestGamesMonitor sgm = new ShortestGamesMonitor("02", "2013");
 
         //apg.buildHastable();
         //mapom.buildHastable();
         //mpom.buildHastable();
         //sgm.buildHastable();
+
+        mapom.saveNMostActivePlayers();
+
+
+
 
         //AssociationPlayerGamesYear apgy = new AssociationPlayerGamesYear("2013");
         //MostPlayedOpeningYear mpoy = new MostPlayedOpeningYear("2013");
@@ -53,14 +62,36 @@ public class Main {
         //mapy.buildHashtable();
         //sgy.buildHashtable();
 
+        //mapy.saveNMostActivePlayers();
+
+
+
+
         //MostPlayedOpeningAll mpoa = new MostPlayedOpeningAll();
-        ShortestGamesAll sga = new ShortestGamesAll();
+        //ShortestGamesAll sga = new ShortestGamesAll();
         //AssociationPlayerGamesAll apga = new AssociationPlayerGamesAll();
         //MostActivePlayerAll mapa = new MostActivePlayerAll();
 
         //mpoa.buildHashtable();
-        sga.buildHashtable();
+        //sga.buildHashtable();
         //apga.buildHashtable();
         //mapa.buildHashtable();
+
+        //sga.saveFiveShortestGames();
+        //mapa.saveNMostActivePlayers();
+
+        ObjectInputStream o = new ObjectInputStream(new FileInputStream("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/most_active_players_in_order_over_a_month.dat"));
+        OccurrenceString os;
+
+        try {
+            do {
+                os = (OccurrenceString) o.readObject();
+                System.out.println(os);
+            } while (os != null);
+        } catch(EOFException eofe) {}
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        o.close();
     }
 }
