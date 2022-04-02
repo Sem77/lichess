@@ -14,9 +14,11 @@ public class GameWriterThread extends Thread {
     }
 
     /**
-     * Thread to save binary version a games in a file
-     * It continuously asks for the next game to PgnGameExtractor
-     * when the string returned is not null, it creates a Game object and save it with the GameSaver object.
+     * Thread qui partage les parties d'échec dans plusieurs fichiers binaires
+     * Il appelle la méthode getNextGame de gameExt qui lui retourne un objet de type GameGameSaver
+     * cet objet contient une partie d'échec et un gameSaver qui permettra d'enregistrer la partie sur le disque
+     * Lorsque le GameGameSaver retourné n'est pas null, il crée un objet de type Game avec la méthode statique gameStringToGameObject de GameExtractorFromPgn
+     * puis enregistre la partie avec la méthode saveGame de gameSaver
      */
     public void run() {
         GameExtractorFromPgn.GameGameSaver gameGameSaver = null;

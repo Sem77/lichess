@@ -1,20 +1,10 @@
 import app.exception.NoFileDataFoundException;
-import app.model.Game;
 import app.model.OccurrenceString;
-import app.monitor.HashtableMakerAll.AssociationPlayerGamesAll;
-import app.monitor.HashtableMakerAll.MostActivePlayerAll;
-import app.monitor.HashtableMakerAll.MostPlayedOpeningAll;
-import app.monitor.HashtableMakerAll.ShortestGamesAll;
-import app.monitor.hashtablemakerMonth.*;
-import app.monitor.hashtablemakeryear.AssociationPlayerGamesYear;
-import app.monitor.hashtablemakeryear.MostActivePlayerYear;
-import app.monitor.hashtablemakeryear.MostPlayedOpeningYear;
-import app.monitor.hashtablemakeryear.ShortestGamesYear;
+import app.monitor.hashtablemaker.bymonth.MostPlayedOpeningMonitor;
+import app.monitor.hashtablemaker.bymonth.OptimizationWriter;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.Hashtable;
-import java.util.TreeSet;
 
 public class Main {
     public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException, NoSuchMethodException {

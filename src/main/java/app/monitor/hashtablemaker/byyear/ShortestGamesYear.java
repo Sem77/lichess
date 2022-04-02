@@ -1,14 +1,25 @@
-package app.monitor.hashtablemakeryear;
+package app.monitor.hashtablemaker.byyear;
 
-import app.optimizer.Constants;
+import app.monitor.hashtablemaker.HashtableFinderByYearInterface;
+import app.monitor.hashtablemaker.HashtableMergerInterface;
+import app.constants.Constants;
 
 import java.io.*;
 import java.util.*;
 
-public class ShortestGamesYear extends HashtableMakerYear {
+public class ShortestGamesYear implements HashtableMergerInterface, HashtableFinderByYearInterface {
+    public String year;
+    public String hashtableMonthName;
+    public String hashTableYearName;
+    public String baseDirectory;
+
     public ShortestGamesYear(String year) {
-        super(year, Constants.SHORTEST_GAMES, Constants.SHORTEST_GAMES_OVER_A_YEAR);
+        this.year = year;
+        this.hashtableMonthName = Constants.SHORTEST_GAMES;
+        this.hashTableYearName = Constants.SHORTEST_GAMES_OVER_A_YEAR;
+        baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
     }
+
 
     public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
@@ -21,11 +32,11 @@ public class ShortestGamesYear extends HashtableMakerYear {
                 mergeHashtables(hashtableYear, hashtableMonth);
                 o.close();
             } catch (FileNotFoundException fnfe) {
-                System.out.println("An hashtable wasn't found");
+                System.out.println("La table de hashage " + hashtableMonthName + " n'a pas été trouvée");
             } catch (ClassNotFoundException cnfe) {
-                System.out.println("Could not load an hashtable");
+                System.out.println("La table de hashage " + hashtableMonthName + " n'a pas pu être chargée");
             } catch (IOException ioe) {
-                System.out.println("There was an error with an hashtable");
+                System.out.println("Erreur lors du chargement");
             }
         }
 

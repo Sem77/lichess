@@ -1,6 +1,8 @@
-package app.monitor.HashtableMakerAll;
+package app.monitor.hashtablemaker.all;
 
-import app.optimizer.Constants;
+import app.monitor.hashtablemaker.HashtableFinderAllInterface;
+import app.monitor.hashtablemaker.HashtableMergerInterface;
+import app.constants.Constants;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,9 +10,15 @@ import java.util.Hashtable;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AssociationPlayerGamesAll extends HashtableMakerAll {
+public class AssociationPlayerGamesAll implements HashtableMergerInterface, HashtableFinderAllInterface {
+    public String hashtableYearName;
+    public String hashTableNameAll;
+    public String baseDirectory;
+
     public AssociationPlayerGamesAll() {
-        super(Constants.A_PLAYER_GAME_OVER_A_YEAR, Constants.A_PLAYER_GAME_ALL);
+        this.hashtableYearName = Constants.A_PLAYER_GAME_OVER_A_YEAR;
+        this.hashTableNameAll = Constants.A_PLAYER_GAME_ALL;
+        baseDirectory = Constants.GAMES_DATA_DIRECTORY;
     }
 
     public void buildHashtable() {

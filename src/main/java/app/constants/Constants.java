@@ -1,4 +1,4 @@
-package app.optimizer;
+package app.constants;
 
 import java.util.regex.Pattern;
 

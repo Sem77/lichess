@@ -1,7 +1,9 @@
-package app.monitor.HashtableMakerAll;
+package app.monitor.hashtablemaker.all;
 
 import app.model.Game;
-import app.optimizer.Constants;
+import app.monitor.hashtablemaker.HashtableFinderAllInterface;
+import app.monitor.hashtablemaker.HashtableMergerInterface;
+import app.constants.Constants;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,10 +11,17 @@ import java.util.Hashtable;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ShortestGamesAll extends HashtableMakerAll {
+public class ShortestGamesAll implements HashtableMergerInterface, HashtableFinderAllInterface {
+    public String hashtableYearName;
+    public String hashTableNameAll;
+    public String baseDirectory;
+
     public ShortestGamesAll() {
-        super(Constants.SHORTEST_GAMES_OVER_A_YEAR, Constants.SHORTEST_GAMES_ALL);
+        this.hashtableYearName = Constants.SHORTEST_GAMES_OVER_A_YEAR;
+        this.hashTableNameAll = Constants.SHORTEST_GAMES_ALL;
+        baseDirectory = Constants.GAMES_DATA_DIRECTORY;
     }
+
 
     public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY;

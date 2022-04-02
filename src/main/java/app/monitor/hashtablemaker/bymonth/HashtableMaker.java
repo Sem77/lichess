@@ -1,7 +1,7 @@
-package app.monitor.hashtablemakerMonth;
+package app.monitor.hashtablemaker.bymonth;
 
 import app.exception.NoFileDataFoundException;
-import app.optimizer.Constants;
+import app.constants.Constants;
 import app.pgn.BinaryGameExtractor;
 import app.threadworker.ThreadWorker;
 
@@ -89,9 +89,7 @@ public abstract class HashtableMaker {
             hashTableOutputStream.writeObject(hashtable);
             hashTableOutputStream.close();
 
-        } /*catch (FileNotFoundException fnfe) {
-            System.out.println("Source file not found");
-        }*/ catch (IOException ioe) {
+        } catch (IOException ioe) {
             System.out.println("There was an error with the file");
         } catch (ClassNotFoundException cnfe) {
             System.out.println("Class not found");

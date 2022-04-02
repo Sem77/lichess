@@ -1,6 +1,6 @@
-package app.monitor.hashtablemakerMonth;
+package app.monitor.hashtablemaker.bymonth;
 
-import app.optimizer.Constants;
+import app.constants.Constants;
 import app.pgn.GameExtractorFromPgn;
 import app.threadworker.GameWriterThread;
 

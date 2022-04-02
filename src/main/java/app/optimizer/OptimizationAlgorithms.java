@@ -3,18 +3,17 @@ package app.optimizer;
 import app.model.Game;
 import app.model.Player;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.TreeSet;
 
 public class OptimizationAlgorithms {
 
     /**
-     * Adds in the hashtable a player and the file containing the game he played
-     * @param game the game to analyse and extract the usernames of the players
-     * @param pathFileContainingGame path of the file containing the game
-     * @param hashtable key: the username of a player
-     *                  value: list of filepath we can find the games that the player played
+     * Ajoute dans la table de hashage un joueur (clé) et le chemin vers le fichier contenant le(s) jeu(x) qu'il a joué
+     * @param game la partie d'échec de laquelle extraire les noms des participants
+     * @param pathFileContainingGame chemin vers le fichier de la partie d'échec
+     * @param hashtable key: le nom d'utilisateur
+     *                  value: liste les chemins vers les fichiers contenant le(s) jeux du joueur
      */
     public synchronized static void gamesOfAPlayer(Game game, String pathFileContainingGame, Hashtable<String, TreeSet<String>> hashtable) {
 
@@ -55,6 +54,13 @@ public class OptimizationAlgorithms {
     }
 
 
+    /**
+     * Ajoute dans la table de hashage un nombre et la liste des chemins vers les parties d'échec ayant ce nombre de coups
+     * @param game la partie d'échec de laquelle extraire le nombre de coups
+     * @param pathFileContainingGame chemin vers le fichier de la partie d'échec
+     * @param hashtable key: un entier
+     *                  value: liste les chemins vers les parties d'échec
+     */
     public synchronized static void shortestGames(Game game, String pathFileContainingGame, Hashtable<Integer, TreeSet<String>> hashtable) {
         int strokesNumber = game.getStrokesNumber();
 
@@ -71,6 +77,12 @@ public class OptimizationAlgorithms {
     }
 
 
+    /**
+     * Ajoute dans la table de hashage une ouverture et le nombre de fois qu'elle a été utilisée
+     * @param game la partie d'échec de laquelle extraire l'ouverture
+     * @param hashtable key: une ouverture
+     *                  value: le nombre de fois qu'elle a été utilisée
+     */
     public synchronized static void mostPlayedOpening(Game game, Hashtable<String, Integer> hashtable) {
         String opening = game.getOpening();
         Integer nbOccOpening;
@@ -81,6 +93,12 @@ public class OptimizationAlgorithms {
     }
 
 
+    /**
+     * Ajoute dans la table de hashage un joueur et le nombre de parties que celui-ci a joué
+     * @param player le joueur concerné
+     * @param hashtable key: le nom d'utilisateur
+     *                  value: le nombre de parties d'échec jouées
+     */
     public synchronized static void mostActivePlayer(Player player, Hashtable<String, Integer> hashtable) {
         String playerUsername = player.getUsername();
         Integer nbGamesPlayed;

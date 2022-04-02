@@ -1,7 +1,9 @@
-package app.monitor.hashtablemakeryear;
+package app.monitor.hashtablemaker.all;
 
 import app.model.OccurrenceString;
-import app.optimizer.Constants;
+import app.monitor.hashtablemaker.HashtableFinderAllInterface;
+import app.monitor.hashtablemaker.HashtableMergerInterface;
+import app.constants.Constants;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,14 +11,21 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Set;
 
-public class MostActivePlayerYear extends HashtableMakerYear {
-    public MostActivePlayerYear(String year) {
-        super(year, Constants.MOST_ACTIVE_PLAYERS, Constants.MOST_ACTIVE_PLAYERS_OVER_A_YEAR);
+public class MostPlayedOpeningAll implements HashtableMergerInterface, HashtableFinderAllInterface {
+    public String hashtableYearName;
+    public String hashTableNameAll;
+    public String baseDirectory;
+
+    public MostPlayedOpeningAll() {
+        this.hashtableYearName = Constants.MOST_PLAYED_OPENING_GAMES_OVER_A_YEAR;
+        this.hashTableNameAll = Constants.MOST_PLAYED_OPENING_GAMES_ALL;
+        baseDirectory = Constants.GAMES_DATA_DIRECTORY;
     }
 
+
     public void buildHashtable() {
-        String baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
-        ArrayList<File> hashtablesPaths = findHashtablesByNameInMonth(new File(baseDirectory), hashtableMonthName);
+        String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
+        ArrayList<File> hashtablesPaths = findHashtablesByNameInYear(new File(baseDirectory), hashtableYearName);
         Hashtable<String, Integer> hashtableYear = new Hashtable<>();
         for (File hashtablePath : hashtablesPaths) {
             try {
@@ -34,7 +43,7 @@ public class MostActivePlayerYear extends HashtableMakerYear {
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_ACTIVE_PLAYERS_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_PLAYED_OPENING_GAMES_ALL + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
         } catch (FileNotFoundException fnfe) {
 
@@ -59,10 +68,15 @@ public class MostActivePlayerYear extends HashtableMakerYear {
         }
     }
 
-    public void saveNMostActivePlayers() {
-        String baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
-        File gamesDataDirectory = new File(baseDirectory);
-        File hashtablePath = new File(gamesDataDirectory + File.separator + Constants.MOST_ACTIVE_PLAYERS_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION);
+    /**
+     * Ordonne dans un fichier les ouvertures les plus jouées sur une toutes les années avec le nombre de nombre de fois qu'elles ont été jouées
+     * rangé par ordre décroissant
+     * La méthode statique de Collections est utilisée pour trier
+     */
+    public void saveNMostPlayedOpening() {
+        String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
+        File gamesDataDirectory = new File(Constants.GAMES_DATA_DIRECTORY);
+        File hashtablePath = new File(gamesDataDirectory + File.separator + Constants.MOST_PLAYED_OPENING_GAMES_ALL + "." + Constants.BINARY_EXTENSION); // list of the path of all hashtables
 
         try {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(hashtablePath));
@@ -71,7 +85,7 @@ public class MostActivePlayerYear extends HashtableMakerYear {
 
             ArrayList<OccurrenceString> occurrenceStringArrayList = OccurrenceString.hashtableToOccurrenceString(hashtable);
             Collections.sort(occurrenceStringArrayList);
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_MOST_ACTIVE_PLAYERS_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_MOST_PLAYED_OPENING_GAMES_ALL + "." + Constants.BINARY_EXTENSION));
 
             for(OccurrenceString occurrenceString : occurrenceStringArrayList) {
                 oos.writeObject(occurrenceString);

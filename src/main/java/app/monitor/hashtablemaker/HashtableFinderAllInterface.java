@@ -1,22 +1,13 @@
-package app.monitor.HashtableMakerAll;
+package app.monitor.hashtablemaker;
 
-import app.optimizer.Constants;
+import app.constants.Constants;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public abstract class HashtableMakerAll {
-    public String hashtableYearName;
-    public String hashTableNameAll;
-    public String baseDirectory;
+public interface HashtableFinderAllInterface {
 
-    public HashtableMakerAll(String hashtableYearName, String hashTableNameAll) {
-        this.hashtableYearName = hashtableYearName;
-        this.hashTableNameAll = hashTableNameAll;
-        baseDirectory = Constants.GAMES_DATA_DIRECTORY;
-    }
-
-    public ArrayList<File> findHashtablesByNameInYear(File baseDirectory, String hashtableName) {
+    default ArrayList<File> findHashtablesByNameInYear(File baseDirectory, String hashtableName) {
         ArrayList<File> hashtablesPath = new ArrayList<>();
 
         // browse by year
@@ -37,5 +28,4 @@ public abstract class HashtableMakerAll {
         else
             return null;
     }
-
 }

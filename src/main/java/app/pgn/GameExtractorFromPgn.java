@@ -1,7 +1,7 @@
 package app.pgn;
 
 import app.model.Game;
-import app.optimizer.Constants;
+import app.constants.Constants;
 
 import java.io.*;
 import java.text.ParseException;
@@ -102,7 +102,7 @@ public class GameExtractorFromPgn {
      * @return the game String found
      * @throws IOException
      */
-    public synchronized String findNextGame() throws IOException {
+    public String findNextGame() throws IOException {
         gameString = "";
         String line;
         int nbEmptyLine = 0;
