@@ -46,6 +46,7 @@ public class AssociationPlayerGamesYear implements HashtableMergerInterface, Has
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.A_PLAYER_GAME_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
+            out.close();
         } catch (FileNotFoundException fnfe) {
 
         } catch (IOException ioe) {

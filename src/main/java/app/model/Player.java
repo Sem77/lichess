@@ -34,12 +34,20 @@ public class Player implements Serializable, Comparable<Player> {
         nbDefeats++;
     }
 
+    public void increaseDefeats(Integer nbDefeats) {
+        this.nbDefeats += nbDefeats;
+    }
+
     public Integer getNbDefeats() {
         return nbDefeats;
     }
 
     public void addLoser(String loserUsername) {
         losersAgainst.add(loserUsername);
+    }
+
+    public void addLoser(TreeSet<String> losersUsername) {
+        losersAgainst.addAll(losersUsername);
     }
 
     public TreeSet<String> getLosersAgainst() {
@@ -60,10 +68,12 @@ public class Player implements Serializable, Comparable<Player> {
     }
 
     @Override
-    public int compareTo(Player player) {
-        if(this.username.equals(player.username))
-            return 0;
-        return 1;
+    public int compareTo(Player other) {
+        if(other.getPageRank() > this.getPageRank())
+            return -1;
+        else if(other.getPageRank() < this.getPageRank())
+            return 1;
+        return 0;
     }
 
     @Override

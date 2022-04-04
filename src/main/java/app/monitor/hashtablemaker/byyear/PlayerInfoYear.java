@@ -1,34 +1,38 @@
 package app.monitor.hashtablemaker.byyear;
 
+import app.constants.Constants;
+import app.model.Player;
 import app.monitor.hashtablemaker.HashtableFinderByYearInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
-import app.constants.Constants;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
+import java.util.TreeSet;
 
-public class ShortestGamesYear implements HashtableMergerInterface, HashtableFinderByYearInterface {
+public class PlayerInfoYear implements HashtableMergerInterface, HashtableFinderByYearInterface {
     public String year;
     public String hashtableMonthName;
     public String hashTableYearName;
     public String baseDirectory;
 
-    public ShortestGamesYear(String year) {
+    public PlayerInfoYear(String year) {
         this.year = year;
-        this.hashtableMonthName = Constants.SHORTEST_GAMES;
-        this.hashTableYearName = Constants.SHORTEST_GAMES_OVER_A_YEAR;
+        this.hashtableMonthName = Constants.PLAYERS_INFO;
+        this.hashTableYearName = Constants.PLAYERS_INFO_OVER_A_YEAR;
         baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
     }
 
-
+    @Override
     public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY + File.separator + year;
         ArrayList<File> hashtablesPaths = findHashtablesByNameInMonth(new File(baseDirectory), hashtableMonthName);
-        Hashtable<Integer, TreeSet<String>> hashtableYear = new Hashtable<>();
+        Hashtable<String, Player> hashtableYear = new Hashtable<>();
         for (File hashtablePath : hashtablesPaths) {
             try {
                 ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtablePath));
-                Hashtable<Integer, TreeSet<String>> hashtableMonth = (Hashtable<Integer, TreeSet<String>>) o.readObject();
+                Hashtable<String, Player> hashtableMonth = (Hashtable<String, Player>) o.readObject();
                 mergeHashtables(hashtableYear, hashtableMonth);
                 o.close();
             } catch (FileNotFoundException fnfe) {
@@ -41,7 +45,7 @@ public class ShortestGamesYear implements HashtableMergerInterface, HashtableFin
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.SHORTEST_GAMES_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableYearName + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
             out.close();
         } catch (FileNotFoundException fnfe) {
@@ -51,19 +55,24 @@ public class ShortestGamesYear implements HashtableMergerInterface, HashtableFin
         }
     }
 
+    @Override
     public void mergeHashtables(Hashtable dest, Hashtable h) {
-        Hashtable<Integer, TreeSet<String>> hashtableDest = dest;
-        Hashtable<Integer, TreeSet<String>> hashtableSrc = h;
-        Set<Integer> keys = hashtableSrc.keySet();
-        for (Integer key : keys) {
-            TreeSet<String> n;
-            TreeSet<String> m = hashtableSrc.get(key);
-
+        Hashtable<String, Player> hashtableDest = dest;
+        Hashtable<String, Player> hashtableSrc = h;
+        Set<String> keys = hashtableSrc.keySet();
+        for (String key : keys) {
+            Player playerDest;
             if(hashtableDest.containsKey(key)) {
-                n = hashtableDest.get(key);
-                m.addAll(n);
+                playerDest = hashtableDest.get(key);
+                Player playerSrc = hashtableSrc.get(key);
+                playerDest.addLoser(playerSrc.getLosersAgainst());
+                playerDest.increaseDefeats(playerSrc.getNbDefeats());
             }
-            dest.put(key, m);
+            else {
+                playerDest = hashtableSrc.get(key);
+            }
+            playerDest.setPageRank(1.0);
+            hashtableDest.put(key, playerDest);
         }
     }
 }

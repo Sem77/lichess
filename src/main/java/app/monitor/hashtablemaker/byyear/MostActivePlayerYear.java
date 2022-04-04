@@ -46,6 +46,7 @@ public class MostActivePlayerYear implements HashtableMergerInterface, Hashtable
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_ACTIVE_PLAYERS_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
+            out.close();
         } catch (FileNotFoundException fnfe) {
 
         } catch (IOException ioe) {

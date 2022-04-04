@@ -45,6 +45,7 @@ public class ShortestGamesAll implements HashtableMergerInterface, HashtableFind
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.SHORTEST_GAMES_ALL + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
+            out.close();
         } catch (FileNotFoundException fnfe) {
 
         } catch (IOException ioe) {

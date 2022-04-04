@@ -20,13 +20,13 @@ public class Main {
         String pgn07 = "/home/ubuntu/IdeaProjects/database/data_src/lichess_db_standard_rated_2013-07.pgn";
 
         OptimizationWriter ow = new OptimizationWriter();
-        //ow.saveOptimizedGames(pgn01, "01", "2013", 4);
-        //ow.saveOptimizedGames(pgn02, "02", "2013", 4);
-        //ow.saveOptimizedGames(pgn03, "03", "2013", 4);
-        //ow.saveOptimizedGames(pgn04, "04", "2013", 4);
-        //ow.saveOptimizedGames(pgn05, "05", "2013", 4);
-        //ow.saveOptimizedGames(pgn06, "06", "2013", 4);
-        //ow.saveOptimizedGames(pgn07, "07", "2013", 4);
+        ow.saveOptimizedGames(pgn01, "01", "2013", 4);
+        ow.saveOptimizedGames(pgn02, "02", "2013", 4);
+        ow.saveOptimizedGames(pgn03, "03", "2013", 4);
+        ow.saveOptimizedGames(pgn04, "04", "2013", 4);
+        ow.saveOptimizedGames(pgn05, "05", "2013", 4);
+        ow.saveOptimizedGames(pgn06, "06", "2013", 4);
+        ow.saveOptimizedGames(pgn07, "07", "2013", 4);
 
 
         /*AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
@@ -77,7 +77,7 @@ public class Main {
         //sga.saveFiveShortestGames();
         //mapa.saveNMostActivePlayers();
 
-        ow.pageRankCalculator("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/players_info_hashtable.dat");
+        /*ow.pageRankCalculator("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/players_info_hashtable.dat");
 
         ObjectInputStream o = new ObjectInputStream(new FileInputStream("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/players_info_hashtable.dat"));
 
@@ -88,7 +88,7 @@ public class Main {
         catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        o.close();
+        o.close();*/
 
 
     }

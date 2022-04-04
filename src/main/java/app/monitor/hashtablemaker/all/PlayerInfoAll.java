@@ -1,8 +1,9 @@
 package app.monitor.hashtablemaker.all;
 
+import app.constants.Constants;
+import app.model.Player;
 import app.monitor.hashtablemaker.HashtableFinderAllInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
-import app.constants.Constants;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,25 +11,27 @@ import java.util.Hashtable;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class AssociationPlayerGamesAll implements HashtableMergerInterface, HashtableFinderAllInterface {
+public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderAllInterface {
     public String hashtableYearName;
     public String hashTableNameAll;
     public String baseDirectory;
 
-    public AssociationPlayerGamesAll() {
-        this.hashtableYearName = Constants.A_PLAYER_GAME_OVER_A_YEAR;
-        this.hashTableNameAll = Constants.A_PLAYER_GAME_ALL;
+    public PlayerInfoAll() {
+        this.hashtableYearName = Constants.PLAYERS_INFO_OVER_A_YEAR;
+        this.hashTableNameAll = Constants.PLAYERS_INFO_ALL;
         baseDirectory = Constants.GAMES_DATA_DIRECTORY;
     }
 
+
+    @Override
     public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
         ArrayList<File> hashtablesPaths = findHashtablesByNameInYear(new File(baseDirectory), hashtableYearName);
-        Hashtable<String, TreeSet<String>> hashtableYear = new Hashtable<>();
+        Hashtable<String, Player> hashtableYear = new Hashtable<>();
         for (File hashtablePath : hashtablesPaths) {
             try {
                 ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtablePath));
-                Hashtable<String, TreeSet<String>> hashtableMonth = (Hashtable<String, TreeSet<String>>) o.readObject();
+                Hashtable<String, Player> hashtableMonth = (Hashtable<String, Player>) o.readObject();
                 mergeHashtables(hashtableYear, hashtableMonth);
                 o.close();
             } catch (FileNotFoundException fnfe) {
@@ -41,7 +44,7 @@ public class AssociationPlayerGamesAll implements HashtableMergerInterface, Hash
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.A_PLAYER_GAME_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableNameAll + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
             out.close();
         } catch (FileNotFoundException fnfe) {
@@ -51,20 +54,28 @@ public class AssociationPlayerGamesAll implements HashtableMergerInterface, Hash
         }
     }
 
-
+    @Override
     public void mergeHashtables(Hashtable dest, Hashtable h) {
-        Hashtable<String, TreeSet<String>> hashtableDest = dest;
-        Hashtable<String, TreeSet<String>> hashtableSrc = h;
+        Hashtable<String, Player> hashtableDest = dest;
+        Hashtable<String, Player> hashtableSrc = h;
         Set<String> keys = hashtableSrc.keySet();
         for (String key : keys) {
-            TreeSet<String> n;
-            TreeSet<String> m = hashtableSrc.get(key);
-
+            Player playerDest;
             if(hashtableDest.containsKey(key)) {
-                n = hashtableDest.get(key);
-                m.addAll(n);
+                playerDest = hashtableDest.get(key);
+                Player playerSrc = hashtableSrc.get(key);
+                playerDest.addLoser(playerSrc.getLosersAgainst());
+                playerDest.increaseDefeats(playerSrc.getNbDefeats());
             }
-            dest.put(key, m);
+            else {
+                playerDest = hashtableSrc.get(key);
+            }
+            playerDest.setPageRank(1.0);
+            hashtableDest.put(key, playerDest);
         }
+    }
+
+    public void saveBestPlayers() {
+        
     }
 }
