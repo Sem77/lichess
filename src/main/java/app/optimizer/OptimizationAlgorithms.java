@@ -107,4 +107,33 @@ public class OptimizationAlgorithms {
         else
             hashtable.put(playerUsername, 1);
     }
+
+
+    public synchronized static void playerInfo(Game game, Hashtable<String, Player> hashtable) {
+        Player winner = game.getWinner();
+        Player loser = game.getLoser();
+
+        // Traitement pour le gagnant
+        if(!hashtable.containsKey(winner.getUsername())) {
+            winner.addLoser(loser.getUsername());
+            hashtable.put(winner.getUsername(), winner);
+        }
+        else {
+            Player player = hashtable.get(winner.getUsername());
+            player.addLoser(loser.getUsername());
+            hashtable.put(winner.getUsername(), player);
+        }
+
+        // Traitement pour le perdant
+        if(!hashtable.containsKey(loser.getUsername())) {
+            loser.increaseDefeats();
+            hashtable.put(loser.getUsername(), loser);
+        }
+        else {
+            Player player = hashtable.get(loser.getUsername());
+            player.increaseDefeats();
+            hashtable.put(loser.getUsername(), player);
+        }
+    }
+
 }

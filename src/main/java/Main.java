@@ -1,10 +1,12 @@
 import app.exception.NoFileDataFoundException;
 import app.model.OccurrenceString;
-import app.monitor.hashtablemaker.bymonth.MostPlayedOpeningMonitor;
-import app.monitor.hashtablemaker.bymonth.OptimizationWriter;
+import app.model.Player;
+import app.monitor.hashtablemaker.bymonth.*;
 
 import java.io.*;
 import java.text.ParseException;
+import java.util.Hashtable;
+import java.util.TreeSet;
 
 public class Main {
     public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException, NoSuchMethodException {
@@ -27,17 +29,19 @@ public class Main {
         //ow.saveOptimizedGames(pgn07, "07", "2013", 4);
 
 
-        //AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
-        //MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
+        /*AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
+        MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
         MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("02", "2013");
-        //ShortestGamesMonitor sgm = new ShortestGamesMonitor("02", "2013");
+        ShortestGamesMonitor sgm = new ShortestGamesMonitor("02", "2013");
+        PlayerInfoWriter piw = new PlayerInfoWriter("02", "2013");
 
-        //apg.buildHastable();
-        //mapom.buildHastable();
-        //mpom.buildHastable();
-        //sgm.buildHastable();
+        apg.buildHastable();
+        mapom.buildHastable();
+        mpom.buildHastable();
+        sgm.buildHastable();
+        piw.buildHastable();*/
 
-        mpom.saveNMostPlayedOpening();
+        //mpom.saveNMostPlayedOpening();
         //mapom.saveNMostActivePlayers();
 
 
@@ -73,18 +77,19 @@ public class Main {
         //sga.saveFiveShortestGames();
         //mapa.saveNMostActivePlayers();
 
-        ObjectInputStream o = new ObjectInputStream(new FileInputStream("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/most_played_opening_games_in_order_over_a_month.dat"));
-        OccurrenceString os;
+        ow.pageRankCalculator("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/players_info_hashtable.dat");
+
+        ObjectInputStream o = new ObjectInputStream(new FileInputStream("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/players_info_hashtable.dat"));
 
         try {
-            do {
-                os = (OccurrenceString) o.readObject();
-                System.out.println(os);
-            } while (os != null);
+            Hashtable<String, Player> h = (Hashtable<String, Player>) o.readObject();
+            System.out.println(h);
         } catch(EOFException eofe) {}
         catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         o.close();
+
+
     }
 }

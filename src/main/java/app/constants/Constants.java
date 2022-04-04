@@ -66,6 +66,8 @@ public class Constants {
     public static final String ORDER_MOST_ACTIVE_PLAYERS_OVER_A_YEAR = "most_active_players_in_order_over_a_year";
     public static final String ORDER_MOST_ACTIVE_PLAYERS_OVER_A_MONTH = "most_active_players_in_order_over_a_month";
 
+    public static final String PLAYERS_INFO = "players_info_hashtable";
+
     public static final int THREADS_DELEGATED = 4;
     public static final int NUMBER_OF_GAMES_PER_FILE = 20;
     public static final String BINARY_EXTENSION = "dat";

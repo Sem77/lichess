@@ -1,10 +1,15 @@
 package app.monitor.hashtablemaker.bymonth;
 
 import app.constants.Constants;
+import app.model.Player;
 import app.pgn.GameExtractorFromPgn;
 import app.threadworker.GameWriterThread;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Class to write in binary files, hashtables or any data structure to optimize the research
@@ -66,4 +71,63 @@ public class OptimizationWriter {
         }
     }
 
+    public void pageRankCalculator(String pathToHashtablePlayerInfo) throws IOException {
+        double EPSILON = 0.001;
+        File hashtableFile = new File(pathToHashtablePlayerInfo);
+        ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtableFile));
+
+        try {
+            Hashtable<String, Player> hashtable = (Hashtable<String, Player>) o.readObject();
+            o.close();
+            Set<String> keys = hashtable.keySet();
+            double oldEpsilon;
+            double newEpsilon = 0;
+            do {
+                 oldEpsilon = newEpsilon;
+                for (String key : keys) {
+                    pageRank(key, hashtable);
+                }
+                newEpsilon = calculEpsilon(hashtable);
+            } while(newEpsilon - oldEpsilon > EPSILON);
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(hashtableFile));
+            out.reset();
+            out.writeObject(hashtable);
+            out.close();
+        } catch(ClassNotFoundException cnfe) {
+            System.out.println("Could not load the hashtable");
+        }
+    }
+
+    private void pageRank(String playerUsername, Hashtable<String, Player> hashtable) {
+        double d = 0.85;
+
+        Player player = getPlayerByUsername(playerUsername, hashtable);
+
+        ArrayList<Player> losersAgainst = new ArrayList<>();
+        for(String loserAgainst : player.getLosersAgainst()) {
+            Player loser = getPlayerByUsername(loserAgainst, hashtable);
+            if(loser != null)
+                losersAgainst.add(loser);
+        }
+        double sum = 0;
+        for(Player loser : losersAgainst) {
+            sum += loser.getPageRank() / loser.getNbDefeats();
+        }
+
+        player.setPageRank(1-d + sum*d);
+    }
+
+    private Player getPlayerByUsername(String playerUsername, Hashtable<String, Player> hashtable) {
+        return hashtable.get(playerUsername);
+    }
+
+    private double calculEpsilon(Hashtable<String, Player> hashtable) {
+        Set<String> keys = hashtable.keySet();
+        double eps = 0.0;
+        for(String key : keys) {
+            Player player = getPlayerByUsername(key, hashtable);
+            eps += player.getPageRank();
+        }
+        return eps;
+    }
 }
