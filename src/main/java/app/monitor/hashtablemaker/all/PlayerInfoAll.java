@@ -6,6 +6,7 @@ import app.model.Player;
 import app.monitor.hashtablemaker.HashtableFinderAllInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
 import app.monitor.hashtablemaker.bymonth.OptimizationWriter;
+import app.optimizer.OptimizationAlgorithms;
 
 import java.io.*;
 import java.util.*;
@@ -43,8 +44,7 @@ public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderA
         }
 
         // Calcul du page rank de chaque joueur
-        OptimizationWriter ow = new OptimizationWriter();
-        ow.pageRankCalculator(hashtableYear);
+        OptimizationAlgorithms.pageRankCalculator(hashtableYear);
 
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableNameAll + "." + Constants.BINARY_EXTENSION));
