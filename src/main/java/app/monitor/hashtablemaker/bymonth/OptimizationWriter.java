@@ -71,7 +71,7 @@ public class OptimizationWriter {
         }
     }
 
-    public void pageRankCalculator(String pathToHashtablePlayerInfo) throws IOException {
+    public void pageRankCalculatorFromFilePath(String pathToHashtablePlayerInfo) throws IOException {
         double EPSILON = 0.001;
         File hashtableFile = new File(pathToHashtablePlayerInfo);
         ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtableFile));
@@ -97,6 +97,21 @@ public class OptimizationWriter {
             System.out.println("Could not load the hashtable");
         }
     }
+
+    public void pageRankCalculator(Hashtable<String, Player> hashtable) {
+        double EPSILON = 0.001;
+        Set<String> keys = hashtable.keySet();
+        double oldEpsilon;
+        double newEpsilon = 0;
+        do {
+            oldEpsilon = newEpsilon;
+            for (String key : keys) {
+                pageRank(key, hashtable);
+            }
+            newEpsilon = calculEpsilon(hashtable);
+        } while(newEpsilon - oldEpsilon > EPSILON);
+    }
+
 
     private void pageRank(String playerUsername, Hashtable<String, Player> hashtable) {
         double d = 0.85;

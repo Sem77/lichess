@@ -86,7 +86,7 @@ public class MostActivePlayerYear implements HashtableMergerInterface, Hashtable
             ois.close();
 
             ArrayList<OccurrenceString> occurrenceStringArrayList = OccurrenceString.hashtableToOccurrenceString(hashtable);
-            Collections.sort(occurrenceStringArrayList);
+            Collections.sort(occurrenceStringArrayList); // trie
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_MOST_ACTIVE_PLAYERS_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
 
             for(OccurrenceString occurrenceString : occurrenceStringArrayList) {

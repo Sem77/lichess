@@ -16,7 +16,7 @@ public class MostActivePlayerAll implements HashtableMergerInterface, HashtableF
     public String hashTableNameAll;
     public String baseDirectory;
 
-    public MostActivePlayerAll(String hashtableYearName, String hashTableNameAll) {
+    public MostActivePlayerAll() {
         this.hashtableYearName = Constants.MOST_ACTIVE_PLAYERS_OVER_A_YEAR;
         this.hashTableNameAll = Constants.MOST_ACTIVE_PLAYERS_ALL;
         baseDirectory = Constants.GAMES_DATA_DIRECTORY;

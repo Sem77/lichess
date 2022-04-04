@@ -1,15 +1,14 @@
 package app.monitor.hashtablemaker.all;
 
 import app.constants.Constants;
+import app.model.OccurrenceString;
 import app.model.Player;
 import app.monitor.hashtablemaker.HashtableFinderAllInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
+import app.monitor.hashtablemaker.bymonth.OptimizationWriter;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderAllInterface {
     public String hashtableYearName;
@@ -43,15 +42,17 @@ public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderA
             }
         }
 
+        // Calcul du page rank de chaque joueur
+        OptimizationWriter ow = new OptimizationWriter();
+        ow.pageRankCalculator(hashtableYear);
+
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableNameAll + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
             out.close();
-        } catch (FileNotFoundException fnfe) {
+        } catch (FileNotFoundException fnfe) {}
+        catch (IOException ioe) {}
 
-        } catch (IOException ioe) {
-
-        }
     }
 
     @Override
@@ -76,6 +77,34 @@ public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderA
     }
 
     public void saveBestPlayers() {
-        
+        String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
+        File gamesDataDirectory = new File(Constants.GAMES_DATA_DIRECTORY);
+        File hashtablePath = new File(gamesDataDirectory + File.separator + Constants.PLAYERS_INFO_ALL + "." + Constants.BINARY_EXTENSION); // list of the path of all hashtables
+
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(hashtablePath));
+            Hashtable<String, Player> hashtable = (Hashtable<String, Player>) ois.readObject();
+            ois.close();
+
+            ArrayList<Player> players = new ArrayList<>();
+
+            Set<String> keys = hashtable.keySet();
+            for(String key : keys) {
+                players.add(hashtable.get(key));
+            }
+            Collections.sort(players); // trie en fonction du page rank
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_BEST_PLAYERS_ALL + "." + Constants.BINARY_EXTENSION));
+
+            for(Player player : players) {
+                oos.writeObject(player);
+            }
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

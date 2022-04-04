@@ -1,7 +1,9 @@
 import app.exception.NoFileDataFoundException;
 import app.model.OccurrenceString;
 import app.model.Player;
+import app.monitor.hashtablemaker.all.*;
 import app.monitor.hashtablemaker.bymonth.*;
+import app.monitor.hashtablemaker.byyear.*;
 
 import java.io.*;
 import java.text.ParseException;
@@ -20,13 +22,13 @@ public class Main {
         String pgn07 = "/home/ubuntu/IdeaProjects/database/data_src/lichess_db_standard_rated_2013-07.pgn";
 
         OptimizationWriter ow = new OptimizationWriter();
-        ow.saveOptimizedGames(pgn01, "01", "2013", 4);
-        ow.saveOptimizedGames(pgn02, "02", "2013", 4);
-        ow.saveOptimizedGames(pgn03, "03", "2013", 4);
-        ow.saveOptimizedGames(pgn04, "04", "2013", 4);
-        ow.saveOptimizedGames(pgn05, "05", "2013", 4);
-        ow.saveOptimizedGames(pgn06, "06", "2013", 4);
-        ow.saveOptimizedGames(pgn07, "07", "2013", 4);
+        //ow.saveOptimizedGames(pgn01, "01", "2013", 4);
+        //ow.saveOptimizedGames(pgn02, "02", "2013", 4);
+        //ow.saveOptimizedGames(pgn03, "03", "2013", 4);
+        //ow.saveOptimizedGames(pgn04, "04", "2013", 4);
+        //ow.saveOptimizedGames(pgn05, "05", "2013", 4);
+        //ow.saveOptimizedGames(pgn06, "06", "2013", 4);
+        //ow.saveOptimizedGames(pgn07, "07", "2013", 4);
 
 
         /*AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
@@ -39,43 +41,55 @@ public class Main {
         mapom.buildHastable();
         mpom.buildHastable();
         sgm.buildHastable();
-        piw.buildHastable();*/
+        piw.buildHastable();
 
-        //mpom.saveNMostPlayedOpening();
-        //mapom.saveNMostActivePlayers();
-
-
+        mpom.saveNMostPlayedOpening();
+        mapom.saveNMostActivePlayers();*/
 
 
-        //AssociationPlayerGamesYear apgy = new AssociationPlayerGamesYear("2013");
-        //MostPlayedOpeningYear mpoy = new MostPlayedOpeningYear("2013");
-        //MostActivePlayerYear mapy = new MostActivePlayerYear("2013");
-        //ShortestGamesYear sgy = new ShortestGamesYear("2013");
+        /*AssociationPlayerGamesYear apgy = new AssociationPlayerGamesYear("2013");
+        MostPlayedOpeningYear mpoy = new MostPlayedOpeningYear("2013");
+        MostActivePlayerYear mapy = new MostActivePlayerYear("2013");
+        ShortestGamesYear sgy = new ShortestGamesYear("2013");
+        PlayerInfoYear piy = new PlayerInfoYear("2013");
 
-        //apgy.buildHashtable();
-        //mpoy.buildHashtable();
-        //mapy.buildHashtable();
-        //sgy.buildHashtable();
+        apgy.buildHashtable();
+        mpoy.buildHashtable();
+        mapy.buildHashtable();
+        sgy.buildHashtable();
+        piy.buildHashtable();
 
-        //mpoy.saveNMostPlayedOpening();
-        //mapy.saveNMostActivePlayers();
+        mpoy.saveNMostPlayedOpening();
+        mapy.saveNMostActivePlayers();*/
+
+
+
+        /*MostPlayedOpeningAll mpoa = new MostPlayedOpeningAll();
+        ShortestGamesAll sga = new ShortestGamesAll();
+        AssociationPlayerGamesAll apga = new AssociationPlayerGamesAll();
+        MostActivePlayerAll mapa = new MostActivePlayerAll();
+        PlayerInfoAll pia = new PlayerInfoAll();
+
+        mpoa.buildHashtable();
+        sga.buildHashtable();
+        apga.buildHashtable();
+        mapa.buildHashtable();
+        pia.buildHashtable();
+
+        mpoa.saveNMostPlayedOpening();
+        sga.saveFiveShortestGames();
+        mapa.saveNMostActivePlayers();
+        pia.saveBestPlayers();*/
 
 
 
 
-        //MostPlayedOpeningAll mpoa = new MostPlayedOpeningAll();
-        //ShortestGamesAll sga = new ShortestGamesAll();
-        //AssociationPlayerGamesAll apga = new AssociationPlayerGamesAll();
-        //MostActivePlayerAll mapa = new MostActivePlayerAll();
 
-        //mpoa.buildHashtable();
-        //sga.buildHashtable();
-        //apga.buildHashtable();
-        //mapa.buildHashtable();
 
-        //mpoa.saveNMostPlayedOpening();
-        //sga.saveFiveShortestGames();
-        //mapa.saveNMostActivePlayers();
+
+
+
+
 
         /*ow.pageRankCalculator("/home/ubuntu/IdeaProjects/database/data_dest/games_data/2013/02/hashtables/players_info_hashtable.dat");
 

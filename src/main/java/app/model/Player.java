@@ -70,9 +70,9 @@ public class Player implements Serializable, Comparable<Player> {
     @Override
     public int compareTo(Player other) {
         if(other.getPageRank() > this.getPageRank())
-            return -1;
-        else if(other.getPageRank() < this.getPageRank())
             return 1;
+        else if(other.getPageRank() < this.getPageRank())
+            return -1;
         return 0;
     }
 
