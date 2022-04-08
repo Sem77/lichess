@@ -41,7 +41,7 @@ public class ShortestGamesYear implements HashtableMergerInterface, HashtableFin
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.SHORTEST_GAMES_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableYearName + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
             out.close();
         } catch (FileNotFoundException fnfe) {

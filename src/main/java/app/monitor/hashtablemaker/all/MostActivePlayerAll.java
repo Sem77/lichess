@@ -43,7 +43,7 @@ public class MostActivePlayerAll implements HashtableMergerInterface, HashtableF
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_ACTIVE_PLAYERS_ALL + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableNameAll + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
             out.close();
         } catch (FileNotFoundException fnfe) {

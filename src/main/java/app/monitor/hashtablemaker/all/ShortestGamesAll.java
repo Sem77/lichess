@@ -77,7 +77,7 @@ public class ShortestGamesAll implements HashtableMergerInterface, HashtableFind
         ArrayList<Game> games = shortestGames(hashtablePath);
 
         try {
-            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.FIVE_SHORTEST_GAMES + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableNameAll + "." + Constants.BINARY_EXTENSION));
             for (Game game : games) {
                 o.writeObject(game);
             }

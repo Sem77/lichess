@@ -4,6 +4,7 @@ import app.model.Player;
 import app.monitor.hashtablemaker.all.*;
 import app.monitor.hashtablemaker.bymonth.*;
 import app.monitor.hashtablemaker.byyear.*;
+import app.pgn.GameExtractorFromPgn;
 
 import java.io.*;
 import java.text.ParseException;
@@ -31,55 +32,62 @@ public class Main {
         //ow.saveOptimizedGames(pgn07, "07", "2013", 4);
 
 
-        /*AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
-        MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
-        MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("02", "2013");
-        ShortestGamesMonitor sgm = new ShortestGamesMonitor("02", "2013");
-        PlayerInfoWriter piw = new PlayerInfoWriter("02", "2013");
+        //AssociationPlayerGamesMonitor apg = new AssociationPlayerGamesMonitor("02", "2013");
+        //MostActivePlayerMonitor mapom = new MostActivePlayerMonitor("02", "2013");
+        //MostPlayedOpeningMonitor mpom = new MostPlayedOpeningMonitor("02", "2013");
+        //ShortestGamesMonitor sgm = new ShortestGamesMonitor("02", "2013");
+        //PlayerInfoWriter piw = new PlayerInfoWriter("02", "2013");
+        FindGameWithLink fgwl = new FindGameWithLink("01", "2013");
 
-        apg.buildHastable();
-        mapom.buildHastable();
-        mpom.buildHastable();
-        sgm.buildHastable();
-        piw.buildHastable();
+        //apg.buildHastable();
+        //mapom.buildHastable();
+        //mpom.buildHastable();
+        //sgm.buildHastable();
+        //piw.buildHastable();
+        //fgwl.buildHastable();
 
-        mpom.saveNMostPlayedOpening();
-        mapom.saveNMostActivePlayers();*/
-
-
-        /*AssociationPlayerGamesYear apgy = new AssociationPlayerGamesYear("2013");
-        MostPlayedOpeningYear mpoy = new MostPlayedOpeningYear("2013");
-        MostActivePlayerYear mapy = new MostActivePlayerYear("2013");
-        ShortestGamesYear sgy = new ShortestGamesYear("2013");
-        PlayerInfoYear piy = new PlayerInfoYear("2013");
-
-        apgy.buildHashtable();
-        mpoy.buildHashtable();
-        mapy.buildHashtable();
-        sgy.buildHashtable();
-        piy.buildHashtable();
-
-        mpoy.saveNMostPlayedOpening();
-        mapy.saveNMostActivePlayers();*/
+        //mpom.saveNMostPlayedOpening();
+        //mapom.saveNMostActivePlayers();
 
 
+        //AssociationPlayerGamesYear apgy = new AssociationPlayerGamesYear("2013");
+        //MostPlayedOpeningYear mpoy = new MostPlayedOpeningYear("2013");
+        //MostActivePlayerYear mapy = new MostActivePlayerYear("2013");
+        //ShortestGamesYear sgy = new ShortestGamesYear("2013");
+        //PlayerInfoYear piy = new PlayerInfoYear("2013");
+        FindGameWithLinkYear fgwly = new FindGameWithLinkYear("2013");
 
-        /*MostPlayedOpeningAll mpoa = new MostPlayedOpeningAll();
+        //apgy.buildHashtable();
+        //mpoy.buildHashtable();
+        //mapy.buildHashtable();
+        //sgy.buildHashtable();
+        //piy.buildHashtable();
+        //fgwly.buildHashtable();
+
+        //mpoy.saveNMostPlayedOpening();
+        //mapy.saveNMostActivePlayers();
+
+
+
+        MostPlayedOpeningAll mpoa = new MostPlayedOpeningAll();
         ShortestGamesAll sga = new ShortestGamesAll();
         AssociationPlayerGamesAll apga = new AssociationPlayerGamesAll();
         MostActivePlayerAll mapa = new MostActivePlayerAll();
         PlayerInfoAll pia = new PlayerInfoAll();
+        FindGameWithLinkAll fgwla = new FindGameWithLinkAll();
 
-        mpoa.buildHashtable();
-        sga.buildHashtable();
-        apga.buildHashtable();
-        mapa.buildHashtable();
-        pia.buildHashtable();
 
-        mpoa.saveNMostPlayedOpening();
-        sga.saveFiveShortestGames();
-        mapa.saveNMostActivePlayers();
-        pia.saveBestPlayers();*/
+        //mpoa.buildHashtable();
+        //sga.buildHashtable();
+        //apga.buildHashtable();
+        //mapa.buildHashtable();
+        //pia.buildHashtable();
+        //fgwla.buildHashtable();
+
+        //mpoa.saveNMostPlayedOpening();
+        //sga.saveFiveShortestGames();
+        //mapa.saveNMostActivePlayers();
+        //pia.saveBestPlayers();
 
 
 

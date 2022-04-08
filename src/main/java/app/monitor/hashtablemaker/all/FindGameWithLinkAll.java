@@ -1,34 +1,33 @@
 package app.monitor.hashtablemaker.all;
 
+import app.constants.Constants;
 import app.monitor.hashtablemaker.HashtableFinderAllInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
-import app.constants.Constants;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
-import java.util.TreeSet;
 
-public class AssociationPlayerGamesAll implements HashtableMergerInterface, HashtableFinderAllInterface {
+public class FindGameWithLinkAll implements HashtableMergerInterface, HashtableFinderAllInterface {
     public String hashtableYearName;
     public String hashTableNameAll;
     public String baseDirectory;
 
-    public AssociationPlayerGamesAll() {
-        this.hashtableYearName = Constants.A_PLAYER_GAME_OVER_A_YEAR;
-        this.hashTableNameAll = Constants.A_PLAYER_GAME_ALL;
+    public FindGameWithLinkAll() {
+        this.hashtableYearName = Constants.GAME_LINK_OVER_A_YEAR;
+        this.hashTableNameAll = Constants.GAME_LINK_ALL;
         baseDirectory = Constants.GAMES_DATA_DIRECTORY;
     }
 
     public void buildHashtable() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
         ArrayList<File> hashtablesPaths = findHashtablesByNameInYear(new File(baseDirectory), hashtableYearName);
-        Hashtable<String, TreeSet<String>> hashtableYear = new Hashtable<>();
+        Hashtable<String, String> hashtableYear = new Hashtable<>();
         for (File hashtablePath : hashtablesPaths) {
             try {
                 ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtablePath));
-                Hashtable<String, TreeSet<String>> hashtableMonth = (Hashtable<String, TreeSet<String>>) o.readObject();
+                Hashtable<String, String> hashtableMonth = (Hashtable<String, String>) o.readObject();
                 mergeHashtables(hashtableYear, hashtableMonth);
                 o.close();
             } catch (FileNotFoundException fnfe) {
@@ -53,18 +52,11 @@ public class AssociationPlayerGamesAll implements HashtableMergerInterface, Hash
 
 
     public void mergeHashtables(Hashtable dest, Hashtable h) {
-        Hashtable<String, TreeSet<String>> hashtableDest = dest;
-        Hashtable<String, TreeSet<String>> hashtableSrc = h;
+        Hashtable<String, String> hashtableDest = dest;
+        Hashtable<String, String> hashtableSrc = h;
         Set<String> keys = hashtableSrc.keySet();
         for (String key : keys) {
-            TreeSet<String> n;
-            TreeSet<String> m = hashtableSrc.get(key);
-
-            if(hashtableDest.containsKey(key)) {
-                n = hashtableDest.get(key);
-                m.addAll(n);
-            }
-            dest.put(key, m);
+            hashtableDest.put(key, hashtableSrc.get(key));
         }
     }
 }

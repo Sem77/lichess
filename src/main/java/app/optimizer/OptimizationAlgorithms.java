@@ -186,4 +186,9 @@ public class OptimizationAlgorithms {
         }
         return eps;
     }
+
+
+    public static void findGameWithLink(Game game, String pathFileContainingGame, Hashtable<String, String> hashtable) {
+        hashtable.put(game.getSite(), pathFileContainingGame);
+    }
 }

@@ -44,7 +44,7 @@ public class MostPlayedOpeningYear implements HashtableMergerInterface, Hashtabl
         }
 
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.MOST_PLAYED_OPENING_GAMES_OVER_A_YEAR + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableYearName + "." + Constants.BINARY_EXTENSION));
             out.writeObject(hashtableYear);
             out.close();
         } catch (FileNotFoundException fnfe) {
