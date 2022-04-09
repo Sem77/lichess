@@ -1,7 +1,7 @@
 package app.pgn;
 
 import app.model.Game;
-import app.constants.Constants;
+import app.constant.Constants;
 
 import java.io.*;
 import java.text.ParseException;
@@ -120,7 +120,8 @@ public class GameExtractorFromPgn {
     }
 
     /**
-     * @return the next game found in the file to the thread asking
+     * @return la prochaine partie trouvée
+     * null s'il n'y a plus de parties
      */
     public synchronized GameGameSaver getNextGame() throws IOException {
         String game = findNextGame();

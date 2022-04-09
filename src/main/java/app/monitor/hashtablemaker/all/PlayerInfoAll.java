@@ -1,11 +1,9 @@
 package app.monitor.hashtablemaker.all;
 
-import app.constants.Constants;
-import app.model.OccurrenceString;
+import app.constant.Constants;
 import app.model.Player;
 import app.monitor.hashtablemaker.HashtableFinderAllInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
-import app.monitor.hashtablemaker.bymonth.OptimizationWriter;
 import app.optimizer.OptimizationAlgorithms;
 
 import java.io.*;

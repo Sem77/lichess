@@ -3,7 +3,7 @@ package app.monitor.hashtablemaker.all;
 import app.model.OccurrenceString;
 import app.monitor.hashtablemaker.HashtableFinderAllInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
-import app.constants.Constants;
+import app.constant.Constants;
 
 import java.io.*;
 import java.util.ArrayList;

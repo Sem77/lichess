@@ -1,6 +1,6 @@
 package app.monitor.hashtablemaker.byyear;
 
-import app.constants.Constants;
+import app.constant.Constants;
 import app.monitor.hashtablemaker.HashtableFinderByYearInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
 

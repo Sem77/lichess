@@ -1,4 +1,4 @@
-package app.constants;
+package app.constant;
 
 import java.util.regex.Pattern;
 

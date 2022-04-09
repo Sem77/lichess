@@ -1,6 +1,6 @@
 package app.monitor.hashtablemaker.all;
 
-import app.constants.Constants;
+import app.constant.Constants;
 import app.monitor.hashtablemaker.HashtableFinderAllInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
 

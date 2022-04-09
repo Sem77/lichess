@@ -1,6 +1,6 @@
 package app.monitor.hashtablemaker;
 
-import app.constants.Constants;
+import app.constant.Constants;
 
 import java.io.File;
 import java.util.ArrayList;

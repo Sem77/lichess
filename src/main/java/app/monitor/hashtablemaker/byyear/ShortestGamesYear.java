@@ -2,7 +2,7 @@ package app.monitor.hashtablemaker.byyear;
 
 import app.monitor.hashtablemaker.HashtableFinderByYearInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
-import app.constants.Constants;
+import app.constant.Constants;
 
 import java.io.*;
 import java.util.*;

@@ -1,7 +1,7 @@
 package app.monitor.hashtablemaker.bymonth;
 
 import app.model.OccurrenceString;
-import app.constants.Constants;
+import app.constant.Constants;
 
 import java.io.*;
 import java.util.ArrayList;

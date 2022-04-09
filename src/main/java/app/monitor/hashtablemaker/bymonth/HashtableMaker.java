@@ -1,7 +1,7 @@
 package app.monitor.hashtablemaker.bymonth;
 
 import app.exception.NoFileDataFoundException;
-import app.constants.Constants;
+import app.constant.Constants;
 import app.pgn.BinaryGameExtractor;
 import app.threadworker.ThreadWorker;
 

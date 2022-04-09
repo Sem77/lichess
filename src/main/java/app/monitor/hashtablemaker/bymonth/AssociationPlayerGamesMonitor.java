@@ -1,6 +1,6 @@
 package app.monitor.hashtablemaker.bymonth;
 
-import app.constants.Constants;
+import app.constant.Constants;
 
 import java.util.Hashtable;
 import java.util.TreeSet;

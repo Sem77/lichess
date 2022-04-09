@@ -1,15 +1,10 @@
 package app.monitor.hashtablemaker.bymonth;
 
-import app.constants.Constants;
-import app.model.Player;
+import app.constant.Constants;
 import app.pgn.GameExtractorFromPgn;
 import app.threadworker.GameWriterThread;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Class to write in binary files, hashtables or any data structure to optimize the research
