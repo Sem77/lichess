@@ -1,15 +1,11 @@
 package app.monitor.hashtablemaker.all;
 
-import app.model.Game;
 import app.monitor.hashtablemaker.HashtableFinderAllInterface;
 import app.monitor.hashtablemaker.HashtableMergerInterface;
 import app.constant.Constants;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class ShortestGamesAll implements HashtableMergerInterface, HashtableFinderAllInterface {
     public String hashtableYearName;
@@ -69,64 +65,52 @@ public class ShortestGamesAll implements HashtableMergerInterface, HashtableFind
         }
     }
 
-    public void saveFiveShortestGames() {
+    public void orderShortestGames() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
         File gamesDataDirectory = new File(Constants.GAMES_DATA_DIRECTORY);
-        File hashtablePath = new File(gamesDataDirectory + File.separator + Constants.SHORTEST_GAMES_ALL + "." + Constants.BINARY_EXTENSION); // list of the path of all hashtables
-
-        ArrayList<Game> games = shortestGames(hashtablePath);
+        File hashtablePath = new File(gamesDataDirectory + File.separator + hashTableNameAll + "." + Constants.BINARY_EXTENSION);
 
         try {
-            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableNameAll + "." + Constants.BINARY_EXTENSION));
-            for (Game game : games) {
-                o.writeObject(game);
-            }
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(hashtablePath));
+            Hashtable<Integer, TreeSet<String>> hashtable = (Hashtable<Integer, TreeSet<String>>) ois.readObject();
+            ois.close();
+
+            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_SHORTEST_GAMES + "." + Constants.BINARY_EXTENSION));
+            shortestGames(hashtable, o);
+
             o.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
-    private static ArrayList<Game> gamesWithNStrokes(File hashtablePath, int nStrokes) throws IOException, ClassNotFoundException {
-        ObjectInputStream o = new ObjectInputStream(new FileInputStream(hashtablePath));
+    private static void writeGamesWithNStrokes(Hashtable<Integer, TreeSet<String>> hashtable, int nStrokes, ObjectOutputStream out) throws IOException, ClassNotFoundException {
 
-        Hashtable<Integer, TreeSet<String>> hashtable = (Hashtable<Integer, TreeSet<String>>) o.readObject();
-        o.close();
+        TreeSet<String> gamesURLS = hashtable.get(nStrokes);
 
-        ArrayList<Game> games = new ArrayList<>();
-        TreeSet<String> gameFiles = hashtable.get(nStrokes);
-
-        if(gameFiles != null) {
-            for (String gameFile : gameFiles) {
-                ObjectInputStream a = new ObjectInputStream(new FileInputStream(gameFile));
-                Game game;
+        if(gamesURLS != null) {
+            for (String gameURL : gamesURLS) {
                 try {
-                    do {
-                        game = (Game) a.readObject();
-                        if (game.getStrokesNumber() == nStrokes) {
-                            games.add(game);
-                        }
-                    } while (game != null);
+                    out.writeObject(gameURL);
                 } catch(EOFException eofe) {}
-                a.close();
             }
         }
-        return games;
     }
 
-    private static ArrayList<Game> shortestGames(File hashtablePath) {
-        ArrayList<Game> shortest = new ArrayList<>();
-        for(int i=0; (i < 50) && (shortest.size() < 5); i++) {
+    private static void shortestGames(Hashtable<Integer, TreeSet<String>> hashtable, ObjectOutputStream out) {
+        TreeSet<Integer> keys = new TreeSet<>(hashtable.keySet());
+        for(Integer i : keys) {
             try {
-                ArrayList<Game> g = gamesWithNStrokes(hashtablePath, i);
-                for (int j = 0; (j < 5 - shortest.size()) && (j < g.size()); j++) {
-                    shortest.add(g.get(j));
-                }
-            } catch(ClassNotFoundException cnfe) {System.out.println("Class not found");}
-            catch(IOException ioe) {}
+                writeGamesWithNStrokes(hashtable, i, out);
+            } catch (ClassNotFoundException cnfe) {
+                System.out.println("Class not found");
+            } catch (IOException ioe) {
+            }
         }
-        return shortest;
     }
+
 }

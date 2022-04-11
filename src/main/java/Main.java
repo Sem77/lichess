@@ -1,6 +1,5 @@
 import app.constant.Constants;
 import app.exception.NoFileDataFoundException;
-import app.model.Game;
 import app.monitor.hashtablemaker.all.*;
 import app.monitor.hashtablemaker.bymonth.*;
 import app.monitor.hashtablemaker.byyear.*;
@@ -8,7 +7,6 @@ import app.pgn.GameExtractorFromPgn;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException, NoSuchMethodException {
@@ -20,6 +18,7 @@ public class Main {
         //buildHashtablesPlayerInfo();
         //buildHashtablesToFindGameWithLink();
 
+        extract1000FirstGames("/home/ubuntu/IdeaProjects/database/data_src", "lichess_db_standard_rated_2014-05.pgn", "/home/ubuntu/IdeaProjects/database/data_src/games_pgn/2014/05");
     }
 
     static void buildBinaryGames(String basePath) {
@@ -206,7 +205,7 @@ public class Main {
         // Construction des tables de hashage pour tout
         ShortestGamesAll sga = new ShortestGamesAll();
         sga.buildHashtable();
-        sga.saveFiveShortestGames();
+        sga.orderShortestGames();
     }
 
     static void buildHashtablesPlayerInfo() {

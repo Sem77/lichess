@@ -32,7 +32,6 @@ public class MostPlayedOpeningMonitor extends HashtableMaker{
                 oos.writeObject(occurrenceString);
             }
             oos.close();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

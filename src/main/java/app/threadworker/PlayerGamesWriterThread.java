@@ -22,7 +22,7 @@ public class PlayerGamesWriterThread extends ThreadWorker {
             try {
                 gameGameFile = games.getNextGame();
                 if(gameGameFile != null) {
-                    OptimizationAlgorithms.gamesOfAPlayer(gameGameFile.game, gameGameFile.pathGameFile, hashtable);
+                    OptimizationAlgorithms.gamesOfAPlayer(gameGameFile.game, hashtable);
                 }
             } catch(ClassNotFoundException cnfe) {
                 System.out.println("Class not found");

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public interface HashtableFinderByYearInterface {
     /**
      * Parcours tous les mois d'une année spécifique à la recherche des tables de hashage ayant le nom "hashtableName"
+     * et les regroupe dans une unique table de hashage
      * @param baseDirectory dossier d'une année et d'un mois dans lequel chercher la table de hashage
      * @param hashtableName nom de la table de hashage à charger et à exploiter
      * @return ArrayList des chemins menant vers ces tables de hashage

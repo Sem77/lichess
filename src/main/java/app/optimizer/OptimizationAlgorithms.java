@@ -11,70 +11,68 @@ import java.util.TreeSet;
 public class OptimizationAlgorithms {
 
     /**
-     * Ajoute dans la table de hashage un joueur (clé) et le chemin vers le fichier contenant le(s) jeu(x) qu'il a joué
+     * Ajoute dans la table de hashage un joueur (clé) et les liens des parties qu'il a joué
      * @param game la partie d'échec de laquelle extraire les noms des participants
-     * @param pathFileContainingGame chemin vers le fichier de la partie d'échec
      * @param hashtable key: le nom d'utilisateur
-     *                  value: liste les chemins vers les fichiers contenant le(s) jeux du joueur
+     *                  value: liste des liens des parties du joueur
      */
-    public synchronized static void gamesOfAPlayer(Game game, String pathFileContainingGame, Hashtable<String, TreeSet<String>> hashtable) {
+    public synchronized static void gamesOfAPlayer(Game game, Hashtable<String, TreeSet<String>> hashtable) {
 
         String white = game.getWhitePlayer().getUsername(); // get the username of the player white
         if(!hashtable.containsKey(white)) {
             /**
-             * if hashtable already contains the username,
-             * just add pathFileContainingGame to the existing list
+             * si la table de hashage contient déjà le nom d'utilisateur
+             * ajoute juste le lien du jeux à la partie existante
              */
-            TreeSet<String> filesContainingGame = new TreeSet<>();
-            filesContainingGame.add(pathFileContainingGame);
-            hashtable.put(white, filesContainingGame);
+            TreeSet<String> urlsGames = new TreeSet<>();
+            urlsGames.add(game.getSite());
+            hashtable.put(white, urlsGames);
         }
         else {
             /**
-             * if not,
-             * add the username and add pathFileContainingGame a new list
+             * si non
+             * crée une nouvelle liste
              */
-            TreeSet<String> filesContainingGame = hashtable.get(white);
-            filesContainingGame.add(pathFileContainingGame);
-            hashtable.put(white, filesContainingGame);
+            TreeSet<String> urlsGames = hashtable.get(white);
+            urlsGames.add(game.getSite());
+            hashtable.put(white, urlsGames);
         }
 
         /**
-         * Do the same for the black player
+         * faire la même chose pour le joueur noir
          */
         String black = game.getBlackPlayer().getUsername(); // get the username of the player black
         if(!hashtable.containsKey(black)) {
-            TreeSet<String> filesContainingGame = new TreeSet<>();
-            filesContainingGame.add(pathFileContainingGame);
-            hashtable.put(black, filesContainingGame);
+            TreeSet<String> urlsGames = new TreeSet<>();
+            urlsGames.add(game.getSite());
+            hashtable.put(black, urlsGames);
         }
         else {
-            TreeSet<String> filesContainingGame = hashtable.get(black);
-            filesContainingGame.add(pathFileContainingGame);
-            hashtable.put(black, filesContainingGame);
+            TreeSet<String> urlsGames = hashtable.get(black);
+            urlsGames.add(game.getSite());
+            hashtable.put(black, urlsGames);
         }
     }
 
 
     /**
-     * Ajoute dans la table de hashage un nombre et la liste des chemins vers les parties d'échec ayant ce nombre de coups
+     * Ajoute dans la table de hashage un nombre et les liens des parties d'échec ayant ce nombre de coups
      * @param game la partie d'échec de laquelle extraire le nombre de coups
-     * @param pathFileContainingGame chemin vers le fichier de la partie d'échec
      * @param hashtable key: un entier
-     *                  value: liste les chemins vers les parties d'échec
+     *                  value: liste des liens des parties d'échec
      */
-    public synchronized static void shortestGames(Game game, String pathFileContainingGame, Hashtable<Integer, TreeSet<String>> hashtable) {
+    public synchronized static void shortestGames(Game game, Hashtable<Integer, TreeSet<String>> hashtable) {
         int strokesNumber = game.getStrokesNumber();
 
         if(!hashtable.containsKey(strokesNumber)) {
-            TreeSet<String> filesContainingGame = new TreeSet<>();
-            filesContainingGame.add(pathFileContainingGame);
-            hashtable.put(strokesNumber, filesContainingGame);
+            TreeSet<String> urlsGames = new TreeSet<>();
+            urlsGames.add(game.getSite());
+            hashtable.put(strokesNumber, urlsGames);
         }
         else {
-            TreeSet<String> filesContainingGame = hashtable.get(strokesNumber);
-            filesContainingGame.add(pathFileContainingGame);
-            hashtable.put(strokesNumber, filesContainingGame);
+            TreeSet<String> urlsGames = hashtable.get(strokesNumber);
+            urlsGames.add(game.getSite());
+            hashtable.put(strokesNumber, urlsGames);
         }
     }
 

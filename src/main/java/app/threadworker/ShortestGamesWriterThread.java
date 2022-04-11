@@ -20,7 +20,7 @@ public class ShortestGamesWriterThread extends ThreadWorker {
             try {
                 gameGameFile = games.getNextGame();
                 if(gameGameFile != null) {
-                    OptimizationAlgorithms.shortestGames(gameGameFile.game, gameGameFile.pathGameFile, hashtable);
+                    OptimizationAlgorithms.shortestGames(gameGameFile.game, hashtable);
                 }
             } catch(ClassNotFoundException cnfe) {
                 System.out.println("Class not found");
