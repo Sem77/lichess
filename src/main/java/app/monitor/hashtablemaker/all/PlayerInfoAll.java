@@ -74,7 +74,10 @@ public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderA
         }
     }
 
-    public void saveBestPlayers() {
+    /**
+     * range dans un fichier par ordre décroissant les joueurs selon leurs page rank
+     */
+    public void saveBestPlayersAccordingPR() {
         String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
         File gamesDataDirectory = new File(Constants.GAMES_DATA_DIRECTORY);
         File hashtablePath = new File(gamesDataDirectory + File.separator + Constants.PLAYERS_INFO_ALL + "." + Constants.BINARY_EXTENSION); // list of the path of all hashtables
@@ -91,7 +94,40 @@ public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderA
                 players.add(hashtable.get(key));
             }
             Collections.sort(players); // trie en fonction du page rank
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_BEST_PLAYERS_ALL + "." + Constants.BINARY_EXTENSION));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_BEST_PLAYERS_ALL_PAGE_RANK + "." + Constants.BINARY_EXTENSION));
+
+            for(Player player : players) {
+                oos.writeObject(player);
+            }
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void saveBestPlayersAccordingHits() {
+        String baseDirectory = Constants.GAMES_DATA_DIRECTORY;
+        File gamesDataDirectory = new File(Constants.GAMES_DATA_DIRECTORY);
+        File hashtablePath = new File(gamesDataDirectory + File.separator + Constants.PLAYERS_INFO_ALL + "." + Constants.BINARY_EXTENSION); // list of the path of all hashtables
+
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(hashtablePath));
+            Hashtable<String, Player> hashtable = (Hashtable<String, Player>) ois.readObject();
+            ois.close();
+
+            ArrayList<Player> players = new ArrayList<>();
+
+            Set<String> keys = hashtable.keySet();
+            for(String key : keys) {
+                players.add(hashtable.get(key));
+            }
+            Collections.sort(players, Comparator.<Player>comparingDouble(player1 -> player1.getAuthority()).thenComparing(player2 -> player2.getAuthority())); // trie en fonction de l'authority
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_BEST_PLAYERS_ALL_HITS + "." + Constants.BINARY_EXTENSION));
 
             for(Player player : players) {
                 oos.writeObject(player);

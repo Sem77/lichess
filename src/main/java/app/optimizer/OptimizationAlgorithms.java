@@ -127,18 +127,36 @@ public class OptimizationAlgorithms {
         // Traitement pour le perdant
         if(!hashtable.containsKey(loser.getUsername())) {
             loser.increaseDefeats();
+            loser.addWinner(winner.getUsername());
             hashtable.put(loser.getUsername(), loser);
         }
         else {
             Player player = hashtable.get(loser.getUsername());
             player.increaseDefeats();
+            player.addWinner(winner.getUsername());
             hashtable.put(loser.getUsername(), player);
         }
     }
 
 
+
+    private static Player getPlayerByUsername(String playerUsername, Hashtable<String, Player> hashtable) {
+        return hashtable.get(playerUsername);
+    }
+
+
+
+    public static void findGameWithLink(Game game, String pathFileContainingGame, Hashtable<String, String> hashtable) {
+        hashtable.put(game.getSite(), pathFileContainingGame);
+    }
+
+
+    /**
+     * parcours la liste de tous les joueurs de la table de hashage et calcule leurs page rank de manière itérative
+     * @param hashtable
+     */
     public static void pageRankCalculator(Hashtable<String, Player> hashtable) {
-        double EPSILON = 0.001;
+        double EPSILON = 0.000001;
         Set<String> keys = hashtable.keySet();
         double oldEpsilon;
         double newEpsilon = 0;
@@ -151,7 +169,11 @@ public class OptimizationAlgorithms {
         } while(newEpsilon - oldEpsilon > EPSILON);
     }
 
-
+    /**
+     * calcule le page rank d'un joueur en fonction du page rank des joueurs qu'il a battu
+     * @param playerUsername
+     * @param hashtable
+     */
     private static void pageRank(String playerUsername, Hashtable<String, Player> hashtable) {
         double d = 0.85;
 
@@ -171,10 +193,6 @@ public class OptimizationAlgorithms {
         player.setPageRank(1-d + sum*d);
     }
 
-    private static Player getPlayerByUsername(String playerUsername, Hashtable<String, Player> hashtable) {
-        return hashtable.get(playerUsername);
-    }
-
     private static double calculEpsilon(Hashtable<String, Player> hashtable) {
         Set<String> keys = hashtable.keySet();
         double eps = 0.0;
@@ -186,7 +204,79 @@ public class OptimizationAlgorithms {
     }
 
 
-    public static void findGameWithLink(Game game, String pathFileContainingGame, Hashtable<String, String> hashtable) {
-        hashtable.put(game.getSite(), pathFileContainingGame);
+    public static void AuthorityAndHUBCalculator(Hashtable<String, Player> hashtable) {
+        double EPSILON = 0.000001;
+        Set<String> keys = hashtable.keySet();
+        double oldEpsilon;
+        double newEpsilon = 0;
+        do {
+            oldEpsilon = newEpsilon;
+            for (String key : keys) {
+                Player player = getPlayerByUsername(key, hashtable);
+                authority(player, hashtable);
+                hub(player, hashtable);
+                normalize(player, hashtable);
+
+                pageRank(key, hashtable);
+            }
+            newEpsilon = calculEpsilon(hashtable);
+        } while(newEpsilon - oldEpsilon > EPSILON);
+    }
+
+    private static void authority(Player player, Hashtable<String, Player> hashtable) {
+        ArrayList<Player> losersAgainst = new ArrayList<>();
+        for(String loserAgainst : player.getLosersAgainst()) {
+            Player loser = getPlayerByUsername(loserAgainst, hashtable);
+            if(loser != null)
+                losersAgainst.add(loser);
+        }
+        double authority = 0;
+        for(Player loserAgainst : losersAgainst) {
+            authority += loserAgainst.getHub();
+        }
+        player.setAuthority(authority);
+    }
+
+    private static void hub(Player player, Hashtable<String, Player> hashtable) {
+        ArrayList<Player> winnersAgainst = new ArrayList<>();
+        for(String winnerAgainst : player.getWinnersAgainst()) {
+            Player winner = getPlayerByUsername(winnerAgainst, hashtable);
+            if(winner != null)
+                winnersAgainst.add(winner);
+        }
+        double hub = 0;
+        for(Player winnerAgainst : winnersAgainst) {
+            hub += winnerAgainst.getAuthority();
+        }
+        player.setHub(hub);
+    }
+
+    private static void normalize(Player player, Hashtable<String, Player> hashtable) {
+        ArrayList<Player> playersAgainst = new ArrayList<>();
+        for(String loserAgainst : player.getLosersAgainst()) {
+            Player loser = getPlayerByUsername(loserAgainst, hashtable);
+            if(loser != null)
+                playersAgainst.add(loser);
+        }
+        for(String winnerAgainst : player.getWinnersAgainst()) {
+            Player winner = getPlayerByUsername(winnerAgainst, hashtable);
+            if(winner != null)
+                playersAgainst.add(winner);
+        }
+
+        double denAuthority = 0;
+        for(Player playerAgainst : playersAgainst) {
+            denAuthority += playerAgainst.getAuthority() * playerAgainst.getAuthority();
+        }
+        denAuthority = Math.sqrt(denAuthority);
+
+        double denHub = 0;
+        for(Player playerAgainst : playersAgainst) {
+            denHub += playerAgainst.getHub() * playerAgainst.getHub();
+        }
+        denHub = Math.sqrt(denHub);
+
+        player.setAuthority(player.getAuthority() / denAuthority);
+        player.setHub(player.getHub() / denHub);
     }
 }

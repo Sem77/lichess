@@ -11,6 +11,7 @@ import java.text.ParseException;
 public class Main {
     public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException, NoSuchMethodException {
 
+        buildBinaryGames(Constants.ROOT_DATA + File.separator + "data_src");
         //buildHashtablesGamesOfAPlayer();
         //buildHashtablesMostPlayedOpening();
         //buildHashtablesMostActivePlayers();
@@ -18,7 +19,7 @@ public class Main {
         //buildHashtablesPlayerInfo();
         //buildHashtablesToFindGameWithLink();
 
-        extract1000FirstGames("/home/ubuntu/IdeaProjects/database/data_src", "lichess_db_standard_rated_2014-05.pgn", "/home/ubuntu/IdeaProjects/database/data_src/games_pgn/2014/05");
+        //extract1000FirstGames("/home/ubuntu/IdeaProjects/database/data_src", "lichess_db_standard_rated_2014-05.pgn", "/home/ubuntu/IdeaProjects/database/data_src/games_pgn/2014/05");
     }
 
     static void buildBinaryGames(String basePath) {
@@ -244,7 +245,7 @@ public class Main {
         // Construction des tables de hashage pour tout
         PlayerInfoAll pia = new PlayerInfoAll();
         pia.buildHashtable();
-        pia.saveBestPlayers();
+        pia.saveBestPlayersAccordingPR();
     }
 
     static void buildHashtablesToFindGameWithLink() {

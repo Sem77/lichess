@@ -1,5 +1,6 @@
 package app.constant;
 
+import java.io.File;
 import java.util.regex.Pattern;
 
 public class Constants {
@@ -72,13 +73,14 @@ public class Constants {
     public static final String PLAYERS_INFO = "players_info_hashtable";
     public static final String PLAYERS_INFO_OVER_A_YEAR = "players_info_over_a_year";
     public static final String PLAYERS_INFO_ALL = "players_info_all";
-    public static final String ORDER_BEST_PLAYERS_ALL = "best_players_in_order_all";
-    public static final String ORDER_BEST_PLAYERS_OVER_A_YEAR = "best_players_in_order_over_a_year";
+    public static final String ORDER_BEST_PLAYERS_ALL_PAGE_RANK = "best_players_page_rank_in_order_all";
+    public static final String ORDER_BEST_PLAYERS_ALL_HITS = "best_players_hits_in_order_all";
 
     public static final int THREADS_DELEGATED = 4;
     public static final int NUMBER_OF_GAMES_PER_FILE = 20;
     public static final String BINARY_EXTENSION = "dat";
     public static final String ROOT_DATA = "/home/ubuntu/IdeaProjects/database";
-    public static final String GAMES_DATA_DIRECTORY = ROOT_DATA + "/data_dest/games_data";
-    public static final String GAMES_HASTABLES = ROOT_DATA + "/data_dest/hashtables";
+    public static final String SOURCE_DATA_DIRECTORY = ROOT_DATA + File.separator + "data_src" + File.separator + "games_pgn";
+    public static final String GAMES_DATA_DIRECTORY = ROOT_DATA + File.separator + "data_dest" + File.separator + "games_data";
+    public static final String GAMES_HASTABLES = ROOT_DATA + File.separator + "data_dest" + File.separator + "hashtables";
 }
