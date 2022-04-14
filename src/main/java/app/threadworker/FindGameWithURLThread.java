@@ -6,8 +6,8 @@ import app.pgn.BinaryGameExtractor;
 import java.io.IOException;
 import java.util.Hashtable;
 
-public class FindGameWithLinkThread extends ThreadWorker {
-    public FindGameWithLinkThread(BinaryGameExtractor games, Hashtable hashtable) {
+public class FindGameWithURLThread extends ThreadWorker {
+    public FindGameWithURLThread(BinaryGameExtractor games, Hashtable hashtable) {
         super(games, hashtable);
     }
 
@@ -19,8 +19,8 @@ public class FindGameWithLinkThread extends ThreadWorker {
             try {
                 gameGameFile = games.getNextGame();
                 if(gameGameFile != null) {
-                    OptimizationAlgorithms.findGameWithLink(gameGameFile.game, gameGameFile.pathGameFile, hashtable);
-                    OptimizationAlgorithms.findGameWithLink(gameGameFile.game, gameGameFile.pathGameFile, hashtable);
+                    OptimizationAlgorithms.findGameWithURL(gameGameFile.game, gameGameFile.pathGameFile, hashtable);
+                    OptimizationAlgorithms.findGameWithURL(gameGameFile.game, gameGameFile.pathGameFile, hashtable);
                 }
             } catch(ClassNotFoundException cnfe) {
                 System.out.println("Class not found");

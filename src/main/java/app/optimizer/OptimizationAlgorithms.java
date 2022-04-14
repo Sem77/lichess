@@ -146,7 +146,7 @@ public class OptimizationAlgorithms {
 
 
 
-    public static void findGameWithLink(Game game, String pathFileContainingGame, Hashtable<String, String> hashtable) {
+    public static void findGameWithURL(Game game, String pathFileContainingGame, Hashtable<String, String> hashtable) {
         hashtable.put(game.getSite(), pathFileContainingGame);
     }
 
@@ -230,7 +230,7 @@ public class OptimizationAlgorithms {
             if(loser != null)
                 losersAgainst.add(loser);
         }
-        double authority = 0;
+        double authority = 1;
         for(Player loserAgainst : losersAgainst) {
             authority += loserAgainst.getHub();
         }
@@ -244,7 +244,7 @@ public class OptimizationAlgorithms {
             if(winner != null)
                 winnersAgainst.add(winner);
         }
-        double hub = 0;
+        double hub = 1;
         for(Player winnerAgainst : winnersAgainst) {
             hub += winnerAgainst.getAuthority();
         }
@@ -264,19 +264,18 @@ public class OptimizationAlgorithms {
                 playersAgainst.add(winner);
         }
 
-        double denAuthority = 0;
+        Double denAuthority = 0.0;
         for(Player playerAgainst : playersAgainst) {
             denAuthority += playerAgainst.getAuthority() * playerAgainst.getAuthority();
         }
         denAuthority = Math.sqrt(denAuthority);
+        player.setAuthority(player.getAuthority() / denAuthority);
 
-        double denHub = 0;
+        Double denHub = 0.0;
         for(Player playerAgainst : playersAgainst) {
             denHub += playerAgainst.getHub() * playerAgainst.getHub();
         }
         denHub = Math.sqrt(denHub);
-
-        player.setAuthority(player.getAuthority() / denAuthority);
         player.setHub(player.getHub() / denHub);
     }
 }

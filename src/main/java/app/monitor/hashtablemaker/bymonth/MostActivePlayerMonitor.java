@@ -11,7 +11,7 @@ import java.util.Hashtable;
 public class MostActivePlayerMonitor extends HashtableMaker {
 
     public MostActivePlayerMonitor(String month, String year) {
-        super(month, year, "app.threadworker.MostActivePlayersOverAMonthWriterThread", new Hashtable<String, Integer>(), Constants.MOST_ACTIVE_PLAYERS);
+        super(month, year, "app.threadworker.MostActivePlayersWriterThread", new Hashtable<String, Integer>(), Constants.MOST_ACTIVE_PLAYERS);
     }
 
     public void saveNMostActivePlayers() {

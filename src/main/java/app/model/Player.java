@@ -115,8 +115,11 @@ public class Player implements Serializable, Comparable<Player> {
         return "Player{" +
                 "username='" + username + '\'' +
                 ", pageRank=" + pageRank +
+                ", authority=" + authority +
+                ", hub=" + hub +
                 ", nbDefeats=" + nbDefeats +
                 ", losersAgainst=" + losersAgainst +
+                ", winnersAgainst=" + winnersAgainst +
                 '}';
     }
 }

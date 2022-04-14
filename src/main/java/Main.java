@@ -11,12 +11,12 @@ import java.text.ParseException;
 public class Main {
     public static void main(String args[]) throws IOException, ClassNotFoundException, ParseException, NoFileDataFoundException, NoSuchMethodException {
 
-        buildBinaryGames(Constants.ROOT_DATA + File.separator + "data_src");
+        //buildBinaryGames(Constants.SOURCE_DATA_DIRECTORY);
         //buildHashtablesGamesOfAPlayer();
         //buildHashtablesMostPlayedOpening();
         //buildHashtablesMostActivePlayers();
         //buildHashtablesShortestGames();
-        //buildHashtablesPlayerInfo();
+        buildHashtablesPlayerInfo();
         //buildHashtablesToFindGameWithLink();
 
         //extract1000FirstGames("/home/ubuntu/IdeaProjects/database/data_src", "lichess_db_standard_rated_2014-05.pgn", "/home/ubuntu/IdeaProjects/database/data_src/games_pgn/2014/05");
@@ -246,6 +246,7 @@ public class Main {
         PlayerInfoAll pia = new PlayerInfoAll();
         pia.buildHashtable();
         pia.saveBestPlayersAccordingPR();
+        pia.saveBestPlayersAccordingHits();
     }
 
     static void buildHashtablesToFindGameWithLink() {
@@ -261,7 +262,7 @@ public class Main {
                         String month = monthDir.getName();
 
                         try {
-                            FindGameWithLink fgwl = new FindGameWithLink(month, year);
+                            FindGameWithURL fgwl = new FindGameWithURL(month, year);
                             fgwl.buildHastable();
                         } catch(NoFileDataFoundException | NoSuchMethodException nfdfe) {
                             System.out.println("Aucun fichier binaire de jeux n'a été trouvé pour le mois " + month + " de l'année " + year);
@@ -276,13 +277,13 @@ public class Main {
             if(yearDir.isDirectory()) {
                 String year = yearDir.getName();
 
-                FindGameWithLinkYear fgwly = new FindGameWithLinkYear(year);
+                FindGameWithURLYear fgwly = new FindGameWithURLYear(year);
                 fgwly.buildHashtable();
             }
         }
 
         // Construction des tables de hashage pour tout
-        FindGameWithLinkAll fgwla = new FindGameWithLinkAll();
+        FindGameWithURLAll fgwla = new FindGameWithURLAll();
         fgwla.buildHashtable();
     }
 

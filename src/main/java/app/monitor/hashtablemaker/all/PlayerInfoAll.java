@@ -43,6 +43,8 @@ public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderA
 
         // Calcul du page rank de chaque joueur
         OptimizationAlgorithms.pageRankCalculator(hashtableYear);
+        // Calcul du score d'authorité et hub de chaque joueur
+        OptimizationAlgorithms.AuthorityAndHUBCalculator(hashtableYear);
 
         try {
             ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + hashTableNameAll + "." + Constants.BINARY_EXTENSION));
@@ -98,6 +100,7 @@ public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderA
 
             for(Player player : players) {
                 oos.writeObject(player);
+                System.out.println(player);
             }
             oos.close();
         } catch (FileNotFoundException e) {
@@ -126,7 +129,7 @@ public class PlayerInfoAll implements HashtableMergerInterface, HashtableFinderA
             for(String key : keys) {
                 players.add(hashtable.get(key));
             }
-            Collections.sort(players, Comparator.<Player>comparingDouble(player1 -> player1.getAuthority()).thenComparing(player2 -> player2.getAuthority())); // trie en fonction de l'authority
+            Collections.sort(players, Comparator.<Player>comparingDouble(player2 -> player2.getAuthority()).thenComparing(player1 -> player1.getAuthority()).reversed()); // trie en fonction de l'authority
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(baseDirectory + File.separator + Constants.ORDER_BEST_PLAYERS_ALL_HITS + "." + Constants.BINARY_EXTENSION));
 
             for(Player player : players) {

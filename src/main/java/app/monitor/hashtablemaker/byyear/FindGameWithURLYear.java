@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
 
-public class FindGameWithLinkYear implements HashtableFinderByYearInterface, HashtableMergerInterface {
+public class FindGameWithURLYear implements HashtableFinderByYearInterface, HashtableMergerInterface {
     public String year;
     public String hashtableMonthName;
     public String hashTableYearName;
     public String baseDirectory;
 
-    public FindGameWithLinkYear(String year) {
+    public FindGameWithURLYear(String year) {
         this.year = year;
         this.hashtableMonthName = Constants.GAME_LINK;
         this.hashTableYearName = Constants.GAME_LINK_OVER_A_YEAR;

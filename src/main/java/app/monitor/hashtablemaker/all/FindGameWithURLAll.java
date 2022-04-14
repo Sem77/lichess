@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
 
-public class FindGameWithLinkAll implements HashtableMergerInterface, HashtableFinderAllInterface {
+public class FindGameWithURLAll implements HashtableMergerInterface, HashtableFinderAllInterface {
     public String hashtableYearName;
     public String hashTableNameAll;
     public String baseDirectory;
 
-    public FindGameWithLinkAll() {
+    public FindGameWithURLAll() {
         this.hashtableYearName = Constants.GAME_LINK_OVER_A_YEAR;
         this.hashTableNameAll = Constants.GAME_LINK_ALL;
         baseDirectory = Constants.GAMES_DATA_DIRECTORY;
